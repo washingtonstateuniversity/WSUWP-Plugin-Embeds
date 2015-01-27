@@ -11,6 +11,8 @@ Author URI: http://web.wsu.edu
 class WSUWP_Embeds {
 	public function __construct() {
 		add_shortcode( 'qualtrics', array( $this, 'display_qualtrics_shortcode' ) );
+		add_shortcode( 'qualtrics_multi', array( $this, 'display_qualtrics_multi_shortcode' ) );
+		add_action( 'wp_head', array( $this, 'handle_qualtrics_multi_shortcode' ) );
 	}
 
 	/**
@@ -40,6 +42,57 @@ class WSUWP_Embeds {
 		$html .= 'style="width: ' . esc_attr( $atts['width'] ) . ';height:' . esc_attr( $atts['height'] ) . ';min-height:' . esc_attr( $atts['min_height'] ) . ';"></iframe>';
 
 		return $html;
+	}
+
+	/**
+	 * Provide a method to randomly redirect the user to up to 5 different Qualtrics surveys.
+	 *
+	 * @return string Empty text, as we output the `script` tag directly.
+	 */
+	public function display_qualtrics_multi_shortcode( $atts ) {
+		$default_atts = array(
+			'url1' => '',
+			'url2' => '',
+			'url3' => '',
+			'url4' => '',
+			'url5' => '',
+		);
+		$atts = shortcode_atts( $default_atts, $atts );
+
+		$urls = array();
+		foreach( $atts as $key => $url ) {
+			if ( preg_match( '/https\:\/\/(.+?)\.qualtrics\.com\/(.+)/i', $url ) ) {
+				$urls[] = $url;
+			}
+		}
+
+		$count = count( $urls );
+
+		$html = '<script type="application/javascript">';
+		$html .= 'var sites = new Array(' . $count . ');';
+
+		for( $i = 0; $i < $count; $i++ ) {
+			$html .= 'sites[' . $i . '] = "' . esc_url( $urls[ $i ] ) . '";';
+		}
+
+		$html .= 'var rnd = Math.floor(Math.random() * ' . $count . ');';
+		$html .= 'window.location.href = sites[rnd];';
+		$html .= '</script>';
+
+		echo $html;
+		return '';
+	}
+
+	/**
+	 * If a single page has the `qualtrics_multi` shortcode, fire that shortcode early as we
+	 * require some manual `script` tags in the header.
+	 */
+	public function handle_qualtrics_multi_shortcode() {
+		global $post;
+		if ( ! is_home() && ! is_front_page() && is_singular( 'page' ) && has_shortcode( $post->post_content, 'qualtrics_multi' ) ) {
+			do_shortcode( $post->post_content );
+			die();
+		}
 	}
 }
 new WSUWP_Embeds();
