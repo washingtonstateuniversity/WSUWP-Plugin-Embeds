@@ -13,6 +13,7 @@ class WSUWP_Embeds {
 		add_shortcode( 'qualtrics', array( $this, 'display_qualtrics_shortcode' ) );
 		add_shortcode( 'qualtrics_multi', array( $this, 'display_qualtrics_multi_shortcode' ) );
 		add_action( 'wp_head', array( $this, 'handle_qualtrics_multi_shortcode' ) );
+		add_shortcode( 'cougsgive', array( $this, 'display_cougsgive') );
 	}
 
 	/**
@@ -93,6 +94,61 @@ class WSUWP_Embeds {
 			do_shortcode( $post->post_content );
 			die();
 		}
+	}
+
+	/**
+	 * Display a money and donors output.
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public function display_cougsgive( $atts ) {
+		$default = array(
+			'money' => '0',
+			'donors' => '0',
+		);
+		$atts = shortcode_atts( $default, $atts );
+
+		$money = absint( str_replace( ',', '', $atts['money'] ) );
+		$donors = absint( str_replace( ',', '', $atts['donors'] ) );
+
+		$money = str_split( $money );
+		$donors = str_split( $donors );
+
+		while ( count( $money ) < 6 ) {
+			array_unshift( $money, '&nbsp;' );
+		}
+
+		while( count( $donors ) < 4 ) {
+			array_unshift( $donors, '&nbsp;' );
+		}
+
+		$content = '<div class="money">';
+		$cnt = 1;
+		foreach( $money as $m ) {
+			if ( 3 === $cnt ) {
+				$content .= '<span class="comma">,</span>';
+			}
+
+			$content .= '<span class="numberstyle">' . $m . '</span>';
+
+			$cnt++;
+		}
+		$content .= '</div>';
+		$content .= '<div class="donors">';
+		$cnt = 1;
+		foreach ( $donors as $d ) {
+			if ( 2 === $cnt ) {
+				$content .= '<span class="comma">,</span>';
+			}
+
+			$content .= '<span class="numberstyle">' . $d . '</span>';
+			$cnt++;
+		}
+		$content .= '</div>';
+
+		return $content;
 	}
 }
 new WSUWP_Embeds();
