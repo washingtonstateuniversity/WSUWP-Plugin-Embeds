@@ -117,11 +117,11 @@ class WSUWP_Embeds {
 		$donors = str_split( $donors );
 
 		while ( count( $money ) < 6 ) {
-			array_unshift( $money, '&nbsp;' );
+			array_unshift( $money, '&nbsp;&nbsp;' );
 		}
 
 		while( count( $donors ) < 4 ) {
-			array_unshift( $donors, '&nbsp;' );
+			array_unshift( $donors, '&nbsp;&nbsp;' );
 		}
 
 		$content = '<div class="money">';
