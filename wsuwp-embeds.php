@@ -127,7 +127,7 @@ class WSUWP_Embeds {
 		$content = '<div class="money">';
 		$cnt = 1;
 		foreach( $money as $m ) {
-			if ( 3 === $cnt ) {
+			if ( 4 === $cnt ) {
 				$content .= '<span class="comma">,</span>';
 			}
 
