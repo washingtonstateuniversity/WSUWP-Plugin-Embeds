@@ -14,6 +14,7 @@ class WSUWP_Embeds {
 		add_shortcode( 'qualtrics_multi', array( $this, 'display_qualtrics_multi_shortcode' ) );
 		add_action( 'wp_head', array( $this, 'handle_qualtrics_multi_shortcode' ) );
 		add_shortcode( 'cougsgive', array( $this, 'display_cougsgive') );
+		add_shortcode( 'cougsgive_tweets', array( $this, 'display_cougsgive_tweets' ) );
 	}
 
 	/**
@@ -147,6 +148,15 @@ class WSUWP_Embeds {
 			$cnt++;
 		}
 		$content .= '</div>';
+
+		return $content;
+	}
+
+	public function display_cougsgive_tweets( $atts ) {
+		ob_start();
+		?><a class="twitter-timeline" href="https://twitter.com/hashtag/cougsgive125" data-widget-id="572888827880054785">#cougsgive125 Tweets</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><?php
+		$content = ob_get_contents();
+		ob_end_clean();
 
 		return $content;
 	}
