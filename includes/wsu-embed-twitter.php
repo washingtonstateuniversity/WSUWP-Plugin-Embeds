@@ -38,7 +38,7 @@ class WSUWP_Embed_Twitter {
 		$widget_id = $matches[2][0];
 		$name = $matches[3][0];
 
-		$shortcode = '[wsu_twitter_timeline href="' . $href . '" id="' . $widget_id . '" name="' . $name . '"]';
+		$shortcode = '[wsu_twitter_timeline href="' . $href . '" data_widget_id="' . $widget_id . '" name="' . $name . '"]';
 
 		$content = str_replace( $matches[0][0], $shortcode, $content );
 
@@ -55,7 +55,7 @@ class WSUWP_Embed_Twitter {
 	public function display_wsu_twitter_timeline( $atts ) {
 		$defaults = array(
 			'href' => '',
-			'id' => '',
+			'data_widget_id' => '',
 			'name' => '',
 		);
 		$atts = shortcode_atts( $defaults, $atts );
@@ -63,7 +63,7 @@ class WSUWP_Embed_Twitter {
 		ob_start();
 		?><a class="twitter-timeline"
 			 href="<?php echo esc_url( $atts['href'] ); ?>"
-			 data-widget-id="<?php echo esc_attr( $atts['id'] ); ?>"><?php echo esc_html( $atts['name'] ); ?></a>
+			 data-widget-id="<?php echo esc_attr( $atts['data_widget_id'] ); ?>"><?php echo esc_html( $atts['name'] ); ?></a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><?php
 
 		$content = ob_get_contents();
