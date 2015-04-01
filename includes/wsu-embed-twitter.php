@@ -3,7 +3,7 @@
 class WSUWP_Embed_Twitter {
 	public function __construct() {
 		add_filter( 'pre_kses', array( $this, 'twitter_timeline_embed_reversal' ) );
-		add_shortcode( 'wsu_twitter_widget', array( $this, 'display_wsu_twitter_widget' ) );
+		add_shortcode( 'wsu_twitter_timeline', array( $this, 'display_wsu_twitter_timeline' ) );
 	}
 
 	public function twitter_timeline_embed_reversal( $content ) {
@@ -23,14 +23,14 @@ class WSUWP_Embed_Twitter {
 		$widget_id = $matches[2][0];
 		$name = $matches[3][0];
 
-		$shortcode = '[wsu_twitter_widget href="' . $href . '" id="' . $widget_id . '" name="' . $name . '"]';
+		$shortcode = '[wsu_twitter_timeline href="' . $href . '" id="' . $widget_id . '" name="' . $name . '"]';
 
 		$content = str_replace( $matches[0][0], $shortcode, $content );
 
 		return $content;
 	}
 
-	public function display_wsu_twitter_widget( $atts ) {
+	public function display_wsu_twitter_timeline( $atts ) {
 		$defaults = array(
 			'href' => '',
 			'id' => '',
