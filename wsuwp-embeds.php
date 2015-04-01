@@ -8,6 +8,8 @@ Author: washingtonstateuniversity, jeremyfelt
 Author URI: http://web.wsu.edu
 */
 
+include_once( __DIR__ . '/includes/wsu-embed-twitter.php' );
+
 class WSUWP_Embeds {
 	public function __construct() {
 		add_shortcode( 'qualtrics', array( $this, 'display_qualtrics_shortcode' ) );
