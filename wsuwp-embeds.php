@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WSU Embeds
-Version: 0.0.6
-Plugin URI: http://web.wsu.edu
+Version: 0.1.0
+Plugin URI: https://web.wsu.edu/
 Description: Provides various embed codes supported on the WSUWP Platform.
 Author: washingtonstateuniversity, jeremyfelt
-Author URI: http://web.wsu.edu
+Author URI: https://web.wsu.edu/
 */
 
 include_once( __DIR__ . '/includes/wsu-embed-twitter.php' );
