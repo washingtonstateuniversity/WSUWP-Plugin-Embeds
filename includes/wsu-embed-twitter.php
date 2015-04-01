@@ -1,20 +1,35 @@
 <?php
-
+/**
+ * Class WSUWP_Embed_Twitter
+ */
 class WSUWP_Embed_Twitter {
+	/**
+	 * Setup hooks.
+	 */
 	public function __construct() {
 		add_filter( 'pre_kses', array( $this, 'twitter_timeline_embed_reversal' ) );
 		add_shortcode( 'wsu_twitter_timeline', array( $this, 'display_wsu_twitter_timeline' ) );
 	}
 
+	/**
+	 * Parse content for Twitter Timeline embed code, likely copied from a profile or search
+	 * result on twitter.com and reverse it into our `wsu_twitter_timeline` shortcode.
+	 *
+	 * @param string $content Content passed through pre_kses.
+	 *
+	 * @return string Modified content.
+	 */
 	public function twitter_timeline_embed_reversal( $content ) {
 		$regex = '#<a[^>]+?class="twitter-timeline"[^>]+?href="(.*)"[^>]+?data-widget-id="(.+?)"[^>]*?>(.+?)</a>\s*?<script>(.+?)</script>#';
 
 		$count = preg_match_all( $regex, $content, $matches );
 
+		// Only look for one instance at this point.
 		if ( 1 !== $count ) {
 			return $content;
 		}
 
+		// A matched instance must have 3 pieces of information for us.
 		if ( ! isset( $matches[1][0] ) || ! isset( $matches[2][0] ) || ! isset( $matches[3][0] ) ) {
 			return $content;
 		}
@@ -30,6 +45,13 @@ class WSUWP_Embed_Twitter {
 		return $content;
 	}
 
+	/**
+	 * Display Twitter timeline embed code based on attributes passed with a shortcode.
+	 *
+	 * @param array $atts
+	 *
+	 * @return string Content to display for the shortcode.
+	 */
 	public function display_wsu_twitter_timeline( $atts ) {
 		$defaults = array(
 			'href' => '',
