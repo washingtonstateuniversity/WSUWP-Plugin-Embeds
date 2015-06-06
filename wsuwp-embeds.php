@@ -9,6 +9,7 @@ Author URI: https://web.wsu.edu/
 */
 
 include_once( __DIR__ . '/includes/wsu-embed-twitter.php' );
+include_once( __DIR__ . '/includes/wsu-embed-uchat.php' );
 
 class WSUWP_Embeds {
 	public function __construct() {
