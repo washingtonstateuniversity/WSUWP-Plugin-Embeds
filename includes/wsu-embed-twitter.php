@@ -20,27 +20,35 @@ class WSUWP_Embed_Twitter {
 	 * @return string Modified content.
 	 */
 	public function twitter_timeline_embed_reversal( $content ) {
-		$regex = '#<a[^>]+?class="twitter-timeline"[^>]+?href="(.*)"[^>]+?data-widget-id="(.+?)"[^>]*?>(.+?)</a>\s*?<script>(.+?)</script>#';
+		$regexes = array();
 
-		$count = preg_match_all( $regex, $content, $matches );
+		// HTML posted through the text editor survives.
+		$regexes[] = '#<a[^>]+?class="twitter-timeline"[^>]+?href="(.*)"[^>]+?data-widget-id="(.+?)"[^>]*?>(.+?)</a>\s*?<script>(.+?)</script>#';
 
-		// Only look for one instance at this point.
-		if ( 1 !== $count ) {
-			return $content;
+		// The visual editor in WordPress encodes HTML tags before sending.
+		$regexes[] = '#&lt;a(?:[^&]|&(?!gt;))+?class="twitter-timeline"(?:[^&]|&(?!gt;))+?href="(.*?)"(?:[^&]|&(?!gt;))+?data-widget-id="(.*?)"[\s]*&gt;(.*?)&lt;/a&gt;(?:[^&]|&(?!gt;))*?&lt;script(.*?)/script&gt;#';
+
+		foreach ( $regexes as $regex ) {
+			if ( ! $count = preg_match_all( $regex, $content, $matches ) ) {
+				continue;
+			}
+
+			if ( 1 !== $count ) {
+				continue;
+			}
+
+			if ( ! isset( $matches[1][0] ) || ! isset( $matches[2][0] ) || ! isset( $matches[3][0] ) ) {
+				continue;
+			}
+
+			$href = $matches[1][0];
+			$widget_id = $matches[2][0];
+			$name = $matches[3][0];
+
+			$shortcode = '[wsu_twitter_timeline href="' . $href . '" data_widget_id="' . $widget_id . '" name="' . $name . '"]';
+
+			$content = str_replace( $matches[0][0], $shortcode, $content );
 		}
-
-		// A matched instance must have 3 pieces of information for us.
-		if ( ! isset( $matches[1][0] ) || ! isset( $matches[2][0] ) || ! isset( $matches[3][0] ) ) {
-			return $content;
-		}
-
-		$href = $matches[1][0];
-		$widget_id = $matches[2][0];
-		$name = $matches[3][0];
-
-		$shortcode = '[wsu_twitter_timeline href="' . $href . '" data_widget_id="' . $widget_id . '" name="' . $name . '"]';
-
-		$content = str_replace( $matches[0][0], $shortcode, $content );
 
 		return $content;
 	}
