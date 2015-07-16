@@ -16,6 +16,10 @@ class WSU_Embed_Facebook {
 			return '';
 		}
 
+		if ( is_admin() ) {
+			echo '[wsu_facebook_post url="' . esc_url( $attrs['url'] ) . '"]';
+		}
+
 		// kses converts & into &amp; and we need to undo this
 		// See https://core.trac.wordpress.org/ticket/11311
 		$attrs['url'] = str_replace( '&amp;', '&', $attrs['url'] );
