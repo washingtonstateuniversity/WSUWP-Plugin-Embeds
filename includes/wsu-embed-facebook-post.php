@@ -48,7 +48,7 @@ class WSU_Embed_Facebook {
 			}
 		}
 
-		wp_register_script( 'facebook-api', 'https://connect.facebook.net/en_US/all.js#xfbml=1&version=v2.3' );
+		wp_register_script( 'facebook-api', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0' );
 		wp_enqueue_script( 'facebook-api' );
 
 		$out = '<div id="fb-root"></div>';
