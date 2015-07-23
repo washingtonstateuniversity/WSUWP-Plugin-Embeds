@@ -11,6 +11,7 @@ Author URI: https://web.wsu.edu/
 include_once( __DIR__ . '/includes/wsu-embed-twitter.php' );
 include_once( __DIR__ . '/includes/wsu-embed-uchat.php' );
 include_once( __DIR__ . '/includes/wsu-embed-facebook-post.php' );
+include_once( __DIR__ . '/includes/wsu-embed-codepen.php' );
 
 class WSUWP_Embeds {
 	public function __construct() {
