@@ -20,6 +20,14 @@ class WSUWP_Embeds {
 		add_action( 'wp_head', array( $this, 'handle_qualtrics_multi_shortcode' ) );
 		add_shortcode( 'cougsgive', array( $this, 'display_cougsgive') );
 		add_shortcode( 'cougsgive_tweets', array( $this, 'display_cougsgive_tweets' ) );
+		add_shortcode( 'vcea_couglink', array( $this, 'display_vcea_couglink' ) );
+	}
+
+	public function display_vcea_couglink() {
+		$output = '<div id="symp_jobswidget" data-csm="wsu-csm.symplicity.com" data-id="072bf5f330abe903e2f331bd55408d6e" data-size="auto" data-css="https://wsu-csm.symplicity.com/css/list_jobs_widget.css" data-logo="" data-header-text="" data-width="320" data-height="480" data-sort-by="posting_date" ></div>
+<script>(function(d, s, id) {   var js, sjs = d.getElementsByTagName(s)[0];   if (d.getElementById(id)) {return;}   js = d.createElement(s); js.id = id;   js.src = "https://static.symplicity.com/jslib/jobswidget/jobswidget.js";   sjs.parentNode.insertBefore(js, sjs); }(document, "script", "symp_jobswidget_js"));</script>';
+
+		return $output;
 	}
 
 	/**
