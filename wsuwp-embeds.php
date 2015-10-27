@@ -21,11 +21,31 @@ class WSUWP_Embeds {
 		add_shortcode( 'cougsgive', array( $this, 'display_cougsgive') );
 		add_shortcode( 'cougsgive_tweets', array( $this, 'display_cougsgive_tweets' ) );
 		add_shortcode( 'vcea_couglink', array( $this, 'display_vcea_couglink' ) );
+		add_shortcode( 'vcea_skyforge', array( $this, 'display_vcea_skyforge' ) );
 	}
 
 	public function display_vcea_couglink() {
 		$output = '<div id="symp_jobswidget" data-csm="wsu-csm.symplicity.com" data-id="b2277c06aa8a3a9dc1174b690b0202c6" data-size="custom" data-css="https://wsu-csm.symplicity.com/css/list_jobs_widget.css" data-logo="" data-header-text="Engineering" data-width="320" data-height="480" data-sort-by="" ></div>
 <script>(function(d, s, id) {   var js, sjs = d.getElementsByTagName(s)[0];   if (d.getElementById(id)) {return;}   js = d.createElement(s); js.id = id;   js.src = "https://static.symplicity.com/jslib/jobswidget/jobswidget.js";   sjs.parentNode.insertBefore(js, sjs); }(document, "script", "symp_jobswidget_js"));</script>';
+
+		return $output;
+	}
+
+	/**
+	 * Display a skyforge.co widget.
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public function display_vcea_skyforge( $atts ) {
+		$defaults = array(
+			'width' => 800,
+			'height' => 500,
+		);
+		$atts = shortcode_atts( $defaults, $atts );
+
+		$output = '<iframe src="https://wsu.skyforge.co/widget/" width="' . absint( $atts['width'] ) . 'px" height="' . absint( $atts['height'] ) . 'px"></iframe>';
 
 		return $output;
 	}
