@@ -23,5 +23,25 @@ var module,countdown=function(v){function A(a,b){var c=a.getTime();a.setMonth(a.
 var wsuwp_counter = wsuwp_counter || { date: "January 13, 2200 23:59:00 PST", wrapper: "strong" };
 
 var wsuwp_timer_id = countdown( new Date( wsuwp_counter.date ), function( ts ) {
-    document.getElementById( "wsuwp-counter" ).innerHTML = ts.toHTML( wsuwp_counter.wrapper );
+    var html;
+
+    function cgleading(n) { if ( 10 > n ) { return '0' + n; } else { return n; }};
+
+    html =  '<span class="cd-days-container">';
+    html += '<span class="cd-number cd-days">' + ts.days + '</span>';
+    html += '<span class="cd-text cd-days-text">Days</span></span>';
+
+    html += '<span class="cd-hours-container">';
+    html += '<span class="cd-number cd-hours">' + ts.hours + '</span>';
+    html += '<span class="cd-text cd-hours-text">Hours</span></span>';
+
+    html += '<span class="cd-minutes-container">';
+    html += '<span class="cd-number cd-minutes">' + ts.minutes + '</span>';
+    html += '<span class="cd-text cd-minutes-text">Minutes</span></span>';
+
+    html += '<span class="cd-seconds-container">';
+    html += '<span class="cd-number cd-seconds">' + ts.seconds + '</span>';
+    html += '<span class="cd-text cd-seconds-text">Seconds</span></span>';
+
+    document.getElementById( "wsuwp-counter" ).innerHTML = html; //ts.toHTML( wsuwp_counter.wrapper );
 }, countdown.YEARS|countdown.MONTHS|countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
