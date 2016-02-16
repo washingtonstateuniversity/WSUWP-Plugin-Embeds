@@ -41,4 +41,4 @@ var wsuwp_timer_id = countdown( new Date( wsuwp_counter.date ), function( ts ) {
     html += '<span class="cd-text cd-seconds-text">Seconds</span></span>';
 
     document.getElementById( "wsuwp-counter" ).innerHTML = html; //ts.toHTML( wsuwp_counter.wrapper );
-}, countdown.YEARS|countdown.MONTHS|countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
+}, countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
