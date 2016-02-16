@@ -19,13 +19,10 @@ var module,countdown=function(v){function A(a,b){var c=a.getTime();a.setMonth(a.
         function(){p=" millisecond; second; minute; hour; day; week; month; year; decade; century; millennium".split(";");q=" milliseconds; seconds; minutes; hours; days; weeks; months; years; decades; centuries; millennia".split(";");r=" and ";t=", ";u="";y=function(a){return a};f=D};d.setLabels=function(a,b,c,d,f,k,m){E({singular:a,plural:b,last:c,delim:d,empty:f,formatNumber:k,formatter:m})};d.resetLabels=C;C();v&&v.exports?v.exports=d:"function"===typeof window.define&&"undefined"!==typeof window.define.amd&&
     window.define("countdown",[],function(){return d});return d}(module);
 
-
 var wsuwp_counter = wsuwp_counter || { date: "January 13, 2200 23:59:00 PST", wrapper: "strong" };
 
 var wsuwp_timer_id = countdown( new Date( wsuwp_counter.date ), function( ts ) {
     var html;
-
-    function cgleading(n) { if ( 10 > n ) { return '0' + n; } else { return n; }};
 
     html =  '<span class="cd-days-container">';
     html += '<span class="cd-number cd-days">' + ts.days + '</span>';
@@ -44,4 +41,4 @@ var wsuwp_timer_id = countdown( new Date( wsuwp_counter.date ), function( ts ) {
     html += '<span class="cd-text cd-seconds-text">Seconds</span></span>';
 
     document.getElementById( "wsuwp-counter" ).innerHTML = html; //ts.toHTML( wsuwp_counter.wrapper );
-}, countdown.YEARS|countdown.MONTHS|countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
+}, countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
