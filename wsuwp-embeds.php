@@ -20,7 +20,7 @@ class WSUWP_Embeds {
 		add_shortcode( 'qualtrics', array( $this, 'display_qualtrics_shortcode' ) );
 		add_shortcode( 'qualtrics_multi', array( $this, 'display_qualtrics_multi_shortcode' ) );
 		add_action( 'wp_head', array( $this, 'handle_qualtrics_multi_shortcode' ) );
-		add_shortcode( 'cougsgive', array( $this, 'display_cougsgive') );
+		add_shortcode( 'cougsgive', array( $this, 'display_cougsgive' ) );
 		add_shortcode( 'cougsgive_tweets', array( $this, 'display_cougsgive_tweets' ) );
 		add_shortcode( 'vcea_couglink', array( $this, 'display_vcea_couglink' ) );
 		add_shortcode( 'vcea_skyforge', array( $this, 'display_vcea_skyforge' ) );
@@ -97,7 +97,7 @@ class WSUWP_Embeds {
 		$atts = shortcode_atts( $default_atts, $atts );
 
 		$urls = array();
-		foreach( $atts as $key => $url ) {
+		foreach ( $atts as $key => $url ) {
 			if ( preg_match( '/https\:\/\/(.+?)\.qualtrics\.com\/(.+)/i', $url ) ) {
 				$urls[] = $url;
 			}
@@ -108,7 +108,7 @@ class WSUWP_Embeds {
 		$html = '<script type="application/javascript">';
 		$html .= 'var sites = new Array(' . $count . ');';
 
-		for( $i = 0; $i < $count; $i++ ) {
+		for ( $i = 0; $i < $count; $i++ ) {
 			$html .= 'sites[' . $i . '] = "' . esc_url( $urls[ $i ] ) . '";';
 		}
 
@@ -116,7 +116,10 @@ class WSUWP_Embeds {
 		$html .= 'window.location.href = sites[rnd];';
 		$html .= '</script>';
 
+		// @codingStandardsIgnoreStart
 		echo $html;
+		// @codingStandardsIgnoreEnd
+
 		return '';
 	}
 
@@ -156,13 +159,13 @@ class WSUWP_Embeds {
 			array_unshift( $money, '&nbsp;&nbsp;' );
 		}
 
-		while( count( $donors ) < 4 ) {
+		while ( count( $donors ) < 4 ) {
 			array_unshift( $donors, '&nbsp;&nbsp;' );
 		}
 
 		$content = '<div class="money">';
 		$cnt = 1;
-		foreach( $money as $m ) {
+		foreach ( $money as $m ) {
 			if ( 4 === $cnt ) {
 				$content .= '<span class="comma">,</span>';
 			}
