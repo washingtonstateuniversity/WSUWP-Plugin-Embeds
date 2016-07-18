@@ -1,5 +1,7 @@
 # WSU Embeds
 
+[![Build Status](https://travis-ci.org/washingtonstateuniversity/WSUWP-Plugin-Embeds.svg?branch=master)](https://travis-ci.org/washingtonstateuniversity/WSUWP-Plugin-Embeds)
+
 Extends the WSUWP Platform to include support for various embeds.
 
 ## Supported Shortcodes
