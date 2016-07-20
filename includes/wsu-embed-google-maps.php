@@ -83,9 +83,24 @@ function wsu_googlemaps_shortcode( $atts ) {
 				$width = (int) $value . $percent;
 			} elseif ( 'h' == $key ) {
 				$height = (int) $value;
-			} else {
+			} elseif( 'https://www_google_com/maps/embed?pb' === $key ) {
+				// Replace any spaces in the URL with +, otherwise the embed will break.
+				$value = preg_replace( '/\s+/', '+', $value );
+
+				// Sanitize the pb key against a set of allowed characters.
+				$value = preg_replace( '/[^a-zA-Z0-9_!+:.&\-]/', '', $value);
+
+				// Replace any & with %26, otherwise the embed will break.
+				$value = str_replace( '&', '%26', $value );
+
+				// Replace any : with %3A. The embed may work fine with this, but we can be safe.
+				$value = str_replace( ':', '%3A', $value );
+
+				// Change the domain back to www.google.com.
 				$key = str_replace( '_', '.', $key );
-				$url .= esc_attr( "$key=$value&amp;" );
+
+				// Phew.
+				$url .= "$key=$value";
 			}
 		}
 		$url = substr( $url, 0, -5 );
