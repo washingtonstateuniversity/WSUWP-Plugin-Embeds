@@ -15,6 +15,7 @@ include_once( __DIR__ . '/includes/wsu-embed-codepen.php' );
 include_once( __DIR__ . '/includes/wsu-embed-countdown.php' );
 include_once( __DIR__ . '/includes/wsu-embed-youtube.php' );
 include_once( __DIR__ . '/includes/wsu-embed-idonate.php' );
+include_once( __DIR__ . '/includes/wsu-embed-google-maps.php' );
 
 class WSUWP_Embeds {
 	public function __construct() {
