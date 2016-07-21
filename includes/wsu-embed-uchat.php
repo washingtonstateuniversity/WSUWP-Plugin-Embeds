@@ -24,10 +24,11 @@ class WSUWP_Embed_Uchat {
 		);
 		$atts = shortcode_atts( $defaults, $atts );
 
-		if ( empty ( $atts['id'] ) ) {
+		if ( empty( $atts['id'] ) ) {
 			return '';
 		}
 
+		// @codingStandardsIgnoreStart
 		ob_start();
 		?>
 		<script type="text/javascript" src="//uchat.co/widget.js?school=<?php echo esc_attr( $atts['id'] ); ?>"></script>
@@ -35,6 +36,7 @@ class WSUWP_Embed_Uchat {
 
 		$content = ob_get_contents();
 		ob_end_clean();
+		// @codingStandardsIgnoreEnd
 
 		return $content;
 	}
