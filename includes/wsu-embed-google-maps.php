@@ -9,8 +9,9 @@
  */
 function wsu_googlemaps_embed_to_short_code( $content ) {
 
-	if ( false === strpos( $content, 'maps.google.' ) && 1 !== preg_match( '@google\.[^/]+/maps?@', $content ) )
+	if ( false === strpos( $content, 'maps.google.' ) && 1 !== preg_match( '@google\.[^/]+/maps?@', $content ) ) {
 		return $content;
+	}
 
 	// IE and TinyMCE format things differently
 	// &lt;iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<a href="https://maps.google.co.uk/maps/ms?msa=0&amp;amp;msid=206216869547772496318.0004bf5f0ff25aea47bd9&amp;amp;hl=en&amp;amp;ie=UTF8&amp;amp;t=m&amp;amp;ll=50.91917,-1.398808&amp;amp;spn=0.013225,0.011794&amp;amp;output=embed&quot;&gt;&lt;/iframe&gt;&lt;br">https://maps.google.co.uk/maps/ms?msa=0&amp;amp;msid=206216869547772496318.0004bf5f0ff25aea47bd9&amp;amp;hl=en&amp;amp;ie=UTF8&amp;amp;t=m&amp;amp;ll=50.91917,-1.398808&amp;amp;spn=0.013225,0.011794&amp;amp;output=embed"&gt;&lt;/iframe&gt;&lt;br</a> /&gt;&lt;small&gt;View &lt;a href="<a href="https://maps.google.co.uk/maps/ms?msa=0&amp;amp;msid=206216869547772496318.0004bf5f0ff25aea47bd9&amp;amp;hl=en&amp;amp;ie=UTF8&amp;amp;t=m&amp;amp;ll=50.91917,-1.398808&amp;amp;spn=0.013225,0.011794&amp;amp;source=embed">https://maps.google.co.uk/maps/ms?msa=0&amp;amp;msid=206216869547772496318.0004bf5f0ff25aea47bd9&amp;amp;hl=en&amp;amp;ie=UTF8&amp;amp;t=m&amp;amp;ll=50.91917,-1.398808&amp;amp;spn=0.013225,0.011794&amp;amp;source=embed</a>" style="color:#0000FF;text-align:left"&gt;OARA Membership Discount Map&lt;/a&gt; in a larger map&lt;/small&gt;
@@ -60,8 +61,9 @@ add_filter( 'pre_kses', 'wsu_googlemaps_embed_to_short_code' );
  *   [googlemaps https://mapsengine.google.com/map/embed?mid=zbBhkou4wwtE.kUmp8K6QJ7SA&w=640&h=480]
  */
 function wsu_googlemaps_shortcode( $atts ) {
-	if ( !isset($atts[0]) )
+	if ( ! isset( $atts[0] ) ) {
 		return '';
+	}
 
 	$params = ltrim( $atts[0], '=' );
 
@@ -73,8 +75,9 @@ function wsu_googlemaps_shortcode( $atts ) {
 		$params = str_replace( '&amp;', '&', $params );
 		parse_str( $params, $arg );
 
-		if ( isset( $arg['hq'] ) )
+		if ( isset( $arg['hq'] ) ) {
 			unset( $arg['hq'] );
+		}
 
 		$url = '';
 		foreach ( (array) $arg as $key => $value ) {
@@ -83,12 +86,12 @@ function wsu_googlemaps_shortcode( $atts ) {
 				$width = (int) $value . $percent;
 			} elseif ( 'h' == $key ) {
 				$height = (int) $value;
-			} elseif( 'https://www_google_com/maps/embed?pb' === $key ) {
+			} elseif ( 'https://www_google_com/maps/embed?pb' === $key ) {
 				// Replace any spaces in the URL with +, otherwise the embed will break.
 				$value = preg_replace( '/\s+/', '+', $value );
 
 				// Sanitize the pb key against a set of allowed characters.
-				$value = preg_replace( '/[^a-zA-Z0-9_!+:.&\-]/', '', $value);
+				$value = preg_replace( '/[^a-zA-Z0-9_!+:.&\-]/', '', $value );
 
 				// Replace any & with %26, otherwise the embed will break.
 				$value = str_replace( '&', '%26', $value );
@@ -105,19 +108,20 @@ function wsu_googlemaps_shortcode( $atts ) {
 		}
 		$url = substr( $url, 0, -5 );
 
-		if( is_ssl() )
+		if ( is_ssl() ) {
 			$url = str_replace( 'http://', 'https://', $url );
+		}
 
 		$css_class = 'googlemaps';
 
 		if ( ! empty( $atts['align'] ) && in_array( strtolower( $atts['align'] ), array( 'left', 'center', 'right' ), true ) ) {
 			$atts['align'] = strtolower( $atts['align'] );
 
-			if ( $atts['align'] === 'left' ) {
+			if ( 'left' === $atts['align'] ) {
 				$css_class .= ' alignleft';
-			} elseif ( $atts['align'] === 'center' ) {
+			} elseif ( 'center' === $atts['align'] ) {
 				$css_class .= ' aligncenter';
-			} elseif ( $atts['align'] === 'right' ) {
+			} elseif ( 'right' === $atts['align'] ) {
 				$css_class .= ' alignright';
 			}
 		}
