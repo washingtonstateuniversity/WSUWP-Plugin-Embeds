@@ -13,6 +13,7 @@ class WSUWP_Embed_Idonate {
 	public function display_wsu_idonate( $atts ) {
 		$defaults = array(
 			'id' => '',
+			'server' => 'staging',
 		);
 		$atts = shortcode_atts( $defaults, $atts );
 
@@ -22,7 +23,13 @@ class WSUWP_Embed_Idonate {
 			return '';
 		}
 
-		wp_enqueue_script( 'wsu-idonate', 'https://staging-embed.idonate.com/idonate.js', array(), false, true );
+		if ( 'production' === $atts['server'] ) {
+			$url = 'https://embed.idonate.com/idonate.js';
+		} else {
+			$url = 'https://staging-embed.idonate.com/idonate.js';
+		}
+
+		wp_enqueue_script( 'wsu-idonate', $url, array(), false, true );
 
 		return '<div data-idonate-embed="' . $atts['id'] . '"></div>';
 	}
