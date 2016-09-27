@@ -16,6 +16,9 @@ Extends the WSUWP Platform to include support for various embeds.
 	* This shortcode can only be used on individual pages. We recommend using the default page template rather than the builder.
 * `[wsu_uchat]` to embed UChat scripts.
 	* `id` - **Required.** The ID for your UChat script.
+* `[tvw_video]` to embed videos from tvw.org.
+    * `id` - **Required.** The ID of the video to play.
+    * `client_id` - Defaults to 9375922947, which may change depending on the video.
 
 ## Twitter Timeline
 
