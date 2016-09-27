@@ -244,7 +244,7 @@ function youtube_id( $url ) {
 	$start = 0;
 	if ( isset( $qargs['start'] ) ) {
 		$start = intval( $qargs['start'] );
-	} else if ( isset( $qargs['t'] ) ) {
+	} elseif ( isset( $qargs['t'] ) ) {
 		$time_pieces = preg_split( '/(?<=\D)(?=\d+)/', $qargs['t'] );
 
 		foreach ( $time_pieces as $time_piece ) {
