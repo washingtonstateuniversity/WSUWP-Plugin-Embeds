@@ -17,13 +17,30 @@ class WSUWP_Embed_TVW_Video {
 		$defaults = array(
 			'event_id' => '',
 			'client_id' => '9375922947',
+			'start' => 0,
+			'stop' => 0,
 		);
 		$atts = shortcode_atts( $defaults, $atts );
 
 		ob_start();
 		?>
 		<div class="invintus-player" data-eventid="<?php echo esc_attr( $atts['event_id'] ); ?>"></div>
-		<script>!(function(src,cb){var s=document.createElement('script');s.src=src;s.async=true;s.onreadystatechange=s.onload=function(){var state=s.readyState;if(!cb.done&&(!state||/loaded|complete/.test(state))){cb.done=true;cb();}};document.getElementsByTagName('head')[0].appendChild(s);})('//hosted.invintusmedia.com/app.js',function(){Invintus.launch({"clientID":"<?php echo esc_js( $atts['client_id'] ); ?>","eventID":"<?php echo esc_js( $atts['event_id'] ); ?>","autoStart":false,"simple":true,"start":0});});</script>
+		<script>!(function(src,cb){var s=document.createElement('script');s.src=src;s.async=true;s.onreadystatechange=s.onload=function(){var state=s.readyState;if(!cb.done&&(!state||/loaded|complete/.test(state))){cb.done=true;cb();}};document.getElementsByTagName('head')[0].appendChild(s);})('//hosted.invintusmedia.com/app.js',function(){Invintus.launch(
+			{
+				"clientID":"<?php echo esc_js( $atts['client_id'] ); ?>",
+				"eventID":"<?php echo esc_js( $atts['event_id'] ); ?>",
+				"autoStart":false,
+				"simple":true
+				<?php
+				if ( 0 < absint( $atts['start'] ) ) {
+					echo ',"start":' . absint( $atts['start'] );
+				}
+
+				if ( 0 < absint( $atts['stop'] ) ) {
+					echo ',"stop":' . absint( $atts['stop'] );
+				}
+				?>
+			});});</script>
 		<?php
 		$content = ob_get_contents();
 		ob_end_clean();
