@@ -19,6 +19,8 @@ Extends the WSUWP Platform to include support for various embeds.
 * `[tvw_video]` to embed videos from tvw.org.
     * `event_id` - **Required.** The ID of the video to play.
     * `client_id` - Defaults to 9375922947, which may change depending on the video.
+    * `start` - The number of seconds into the video at which it should start playing.
+    * `stop` - The number of seconds into the video at which it should stop playing.
 
 ## Twitter Timeline
 
