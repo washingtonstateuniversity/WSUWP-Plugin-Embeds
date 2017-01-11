@@ -25,7 +25,7 @@ class WSUWP_Embed_TVW_Video {
 		ob_start();
 		?>
 		<div class="invintus-player" data-eventid="<?php echo esc_attr( $atts['event_id'] ); ?>"></div>
-		<script>!(function(src,cb){var s=document.createElement('script');s.src=src;s.async=true;s.onreadystatechange=s.onload=function(){var state=s.readyState;if(!cb.done&&(!state||/loaded|complete/.test(state))){cb.done=true;cb();}};document.getElementsByTagName('head')[0].appendChild(s);})('//hosted.invintusmedia.com/app.js',function(){Invintus.launch(
+		<script>!(function(src,cb){var s=document.createElement('script');s.src=src;s.async=true;if(s.readyState){s.onreadystatechange=function(){if(s.readyState=='loaded'||s.readyState=='complete'){s.onreadystatechange=null;cb();}};}else{s.onload=function(){cb();};}document.getElementsByTagName('head')[0].appendChild(s);})('//mediaplayer.invintusmedia.com/app.js',function(){Invintus.launch(
 			{
 				"clientID":"<?php echo esc_js( $atts['client_id'] ); ?>",
 				"eventID":"<?php echo esc_js( $atts['event_id'] ); ?>",
