@@ -33,11 +33,11 @@ class WSUWP_Embed_TVW_Video {
 				"simple":true
 				<?php
 				if ( 0 < absint( $atts['start'] ) ) {
-					echo ',"start":' . absint( $atts['start'] );
+					echo ',"startStreamAt":' . absint( $atts['start'] );
 				}
 
 				if ( 0 < absint( $atts['stop'] ) ) {
-					echo ',"stop":' . absint( $atts['stop'] );
+					echo ',"stopStreamAt":' . absint( $atts['stop'] );
 				}
 				?>
 			});});</script>
