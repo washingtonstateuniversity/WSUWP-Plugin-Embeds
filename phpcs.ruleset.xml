@@ -3,6 +3,7 @@
     <description>Sniffs for the coding standards of the WSUWP Embeds plugin</description>
 
     <rule ref="WordPress-Extra">
+        <exclude name="WordPress.NamingConventions.ValidFunctionName" />
         <exclude name="WordPress.PHP.StrictComparisons" />
     </rule>
 </ruleset>
