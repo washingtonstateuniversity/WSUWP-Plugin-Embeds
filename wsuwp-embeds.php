@@ -21,6 +21,8 @@ add_action( 'after_setup_theme', 'WSUWP_Embeds' );
 /**
  * Start things up.
  *
+ * @since 0.9.0
+ *
  * @return \WSUWP_Embeds
  */
 function WSUWP_Embeds() {
