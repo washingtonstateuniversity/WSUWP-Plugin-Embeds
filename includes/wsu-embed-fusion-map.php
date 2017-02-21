@@ -69,7 +69,7 @@ class WSUWP_Embed_Fusion_Map {
 			<?php echo '#' . esc_attr( $atts['map_html_id'] ); ?> { height: 100%; min-height: 600px; }
 			.fusion-map-wrapper {
 				position: relative;
-				padding-bottom: 56.25%;
+				padding-bottom: 75%;
 				padding-top: 30px;
 				height: 0;
 				overflow: hidden;
