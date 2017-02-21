@@ -82,6 +82,10 @@ class WSUWP_Embeds {
 		if ( apply_filters( 'wsuwp_embeds_enable_tvw_video', true ) ) {
 			require_once( dirname( __FILE__ ) . '/wsu-embed-tvw-video.php' );
 		}
+
+		if ( apply_filters( 'wsuwp_embeds_enable_fusion_map', true ) ) {
+			require_once( dirname( __FILE__ ) . '/wsu-embed-fusion-map.php' );
+		}
 	}
 
 	public function display_vcea_couglink() {
