@@ -31,6 +31,7 @@ class WSUWP_Embed_Fusion_Map {
 		);
 		$atts = shortcode_atts( $defaults, $atts );
 
+		// @codingStandardsIgnoreStart
 		ob_start();
 		?>
 		<script type="text/javascript">
@@ -83,6 +84,7 @@ class WSUWP_Embed_Fusion_Map {
 			}
 		</style>
 		<?php
+		// @codingStandardsIgnoreEnd
 		$content = ob_get_contents();
 		ob_end_clean();
 
