@@ -86,6 +86,10 @@ class WSUWP_Embeds {
 		if ( apply_filters( 'wsuwp_embeds_enable_fusion_map', true ) ) {
 			require_once( dirname( __FILE__ ) . '/wsu-embed-fusion-map.php' );
 		}
+
+		if ( apply_filters( 'wsuwp_embeds_enable_alphabetic_index', true ) ) {
+			require_once( dirname( __FILE__ ) . '/wsu-embed-alphabetic-index.php' );
+		}
 	}
 
 	public function display_vcea_couglink() {
