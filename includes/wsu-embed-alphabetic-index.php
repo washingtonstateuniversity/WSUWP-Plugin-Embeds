@@ -9,6 +9,7 @@ class WSUWP_Embed_Alphabetic_Index {
 		$defaults = array(
 			'site_category_slug' => '',
 			'header_level' => 'h2',
+			'count' => 100,
 		);
 
 		$atts = shortcode_atts( $defaults, $atts );
@@ -57,7 +58,7 @@ class WSUWP_Embed_Alphabetic_Index {
 		// Sorting by name is more reliable (as titles can have weird characters),
 		// but it can also yield unexpected results.
 		$query_args = array(
-			'posts_per_page' => -1,
+			'posts_per_page' => absint( $atts['count'] ),
 			'category_name' => sanitize_key( $atts['site_category_slug'] ),
 			'orderby' => 'name',
 			'order' => 'asc',
