@@ -90,6 +90,10 @@ class WSUWP_Embeds {
 		if ( apply_filters( 'wsuwp_embeds_enable_alphabetic_index', true ) ) {
 			require_once( dirname( __FILE__ ) . '/wsu-embed-alphabetic-index.php' );
 		}
+
+		if ( apply_filters( 'wsuwp_embeds_enable_search_form', true ) ) {
+			require_once( dirname( __FILE__ ) . '/wsu-embed-search-form.php' );
+		}
 	}
 
 	public function display_vcea_couglink() {
