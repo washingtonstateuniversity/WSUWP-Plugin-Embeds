@@ -27,9 +27,20 @@ class WSUWP_Embed_Fusion_Map {
 			'center_lat' => '47.0068',
 			'center_lng' => '-120.5360',
 			'zoom' => 7,
+			'template_id' => '',
+			'style_id' => '',
 			'fusion_table_id' => '',
 		);
 		$atts = shortcode_atts( $defaults, $atts );
+
+		$options = array();
+		if ( is_numeric( $atts['template_id'] ) ) {
+			$options['templateId'] = absint( $atts['template_id'] );
+		}
+
+		if ( is_numeric( $atts['style_id'] ) ) {
+			$options['styleId'] = absint( $atts['style_id'] );
+		}
 
 		// @codingStandardsIgnoreStart
 		ob_start();
@@ -49,10 +60,13 @@ class WSUWP_Embed_Fusion_Map {
 						select: 'geometry',
 						from: '<?php echo esc_js( $atts['fusion_table_id'] ); ?>'
 					},
-					options: {
-        					styleId: 6,
-        					templateId: 9
-    					},		      
+					<?php
+					if ( ! empty( $options ) ) {
+						echo 'options: ';
+						echo wp_json_encode( $options );
+						echo ',';
+					}
+					?>
 					styles: [{
 						polygonOptions: {
 							fillColor: '#ca1237',
