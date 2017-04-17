@@ -49,6 +49,10 @@ class WSUWP_Embed_Fusion_Map {
 						select: 'geometry',
 						from: '<?php echo esc_js( $atts['fusion_table_id'] ); ?>'
 					},
+					options: {
+        					styleId: 6,
+        					templateId: 9
+    					},		      
 					styles: [{
 						polygonOptions: {
 							fillColor: '#ca1237',
