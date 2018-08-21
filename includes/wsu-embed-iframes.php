@@ -63,9 +63,10 @@ class WSUWP_Embed_Iframes {
 
 		if ( ! empty( $atts['responsive'] ) ) {
 			$ratio = ( absint( $atts['height'] ) / absint( $atts['width'] ) ) * 100;
+			$padding_bottom = number_format_i18n( $ratio, 2 ); // Allow up to two decimal points.
 			?>
 			<div class="wsuwp-embed-responsive-container"
-				 style="overflow:hidden;padding-bottom:<?php echo esc_html( $ratio ); ?>%;position:relative;">
+				 style="overflow:hidden;padding-bottom:<?php echo esc_html( $padding_bottom ); ?>%;position:relative;">
 			<?php
 		}
 
