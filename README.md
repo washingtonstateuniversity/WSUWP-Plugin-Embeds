@@ -21,6 +21,12 @@ Extends the WSUWP Platform to include support for various embeds.
     * `client_id` - Defaults to 9375922947, which may change depending on the video.
     * `start` - The number of seconds into the video at which it should start playing.
     * `stop` - The number of seconds into the video at which it should stop playing.
+* `[wsuwp_iframe]` to embed iframes.
+    * `src` - The full URL of the page to embed. Currently allows pages from `emailwsu.sharepoint.com` only. Required.
+    * `title` - The value to use for the iframe `title` attribute. Required.
+    * `width`- Defaults to 800.
+    * `height` - Defaults to 600.
+    * `responsive` - Set to any value to make the iframe responsive. Blank by default.
 
 ## Twitter Timeline
 

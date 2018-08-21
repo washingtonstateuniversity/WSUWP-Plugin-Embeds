@@ -108,6 +108,5 @@ class WSUWP_Embed_Fusion_Map {
 
 		return $content;
 	}
-
 }
 new WSUWP_Embed_Fusion_Map();
