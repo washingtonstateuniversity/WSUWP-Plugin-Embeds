@@ -59,6 +59,11 @@ class WSUWP_Embed_Iframes {
 			return '<!-- The wsuwp_iframe shortcode does not allow embeds from ' . esc_html( $url['host'] ) . '. -->';
 		}
 
+		// "Endcode" any curly brackets if the URL is from Sharepoint...
+		if ( 'emailwsu.sharepoint.com' === $url['host'] ) {
+			$atts['src'] = str_replace( array( '{', '}' ), array( '%7B', '%7D' ), $atts['src'] );
+		}
+
 		ob_start();
 
 		if ( ! empty( $atts['responsive'] ) ) {
