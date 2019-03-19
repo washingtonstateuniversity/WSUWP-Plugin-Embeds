@@ -27,6 +27,8 @@ Extends the WSUWP Platform to include support for various embeds.
     * `width`- Defaults to 800.
     * `height` - Defaults to 600.
     * `responsive` - Set to any value to make the iframe responsive. Blank by default.
+* `[formtool]` - to embed formtool forms
+    * `url` - The URL for the form. 
 
 ## Twitter Timeline
 
