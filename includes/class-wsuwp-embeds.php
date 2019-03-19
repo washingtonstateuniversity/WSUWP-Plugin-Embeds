@@ -38,7 +38,69 @@ class WSUWP_Embeds {
 		add_shortcode( 'cougsgive_tweets', array( $this, 'display_cougsgive_tweets' ) );
 		add_shortcode( 'vcea_couglink', array( $this, 'display_vcea_couglink' ) );
 		add_shortcode( 'vcea_skyforge', array( $this, 'display_vcea_skyforge' ) );
+		add_shortcode( 'formtool', array( $this, 'display_formtool_shortcode' ), 10, 3 );
 	}
+
+
+	/**
+	 * Adds a formtool shortcode for emeding formtool forms
+	 *
+	 * @since 0.12.3
+	 *
+	 * @param array $atts Array of shortcode attributes
+	 * @param string|null $content Shortcode content
+	 * @param string $tag Shortcode tag
+	 *
+	 */
+	public function display_formtool_shortcode( $atts, $content, $tag ) {
+
+		$html = '';
+
+		$default_atts = array(
+			'url'    => '',
+			'bypass' => false,
+		);
+
+		$atts = shortcode_atts( $default_atts, $atts );
+
+		if ( ! empty( $atts['url'] ) ) {
+
+			$url_data = explode( '?', $atts['url'] );
+
+			if ( ! empty( $url_data[1] ) ) {
+
+				$group = str_replace( 'https://formtool.wsu.edu/', '', $url_data[0] );
+
+				$group = explode( '/', $group );
+
+				$group = $group[0];
+
+				$default_params = array( 'formid' => false );
+
+				$parse_string = wp_parse_args( $url_data[1], $default_params );
+
+				if ( ! empty( $parse_string['formid'] ) ) {
+
+					$form_url = $atts['url'];
+
+					$form_id = $parse_string['formid'];
+
+					$form_group = $group;
+
+					ob_start();
+
+					include dirname( dirname( __FILE__ ) ) . '/displays/formtool.php';
+
+					$html = ob_get_clean();
+
+				} // End if
+			} // End if
+		} // End if
+
+		return $html;
+
+	} // End display_formtool_shortcode
+
 
 	/**
 	 * Sets up the embeds provided by this plugin and provides filters to determine

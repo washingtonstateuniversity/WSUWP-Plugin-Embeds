@@ -1,0 +1,1 @@
+<div id="formtoolapp"><script>var src="<?php echo esc_url( $form_url ); ?>&skiptemplate=1";</script><script src="http://formtool.wsu.edu/<?php echo esc_html( $form_group ); ?>/signup/javascript.castle?formid=<?php echo esc_html( $form_id ); ?>" type="text/javascript"></script></div>
