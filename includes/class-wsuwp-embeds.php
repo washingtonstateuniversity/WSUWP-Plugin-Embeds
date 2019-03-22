@@ -69,7 +69,9 @@ class WSUWP_Embeds {
 
 			if ( ! empty( $url_data[1] ) ) {
 
-				$group = str_replace( 'https://formtool.wsu.edu/', '', $url_data[0] );
+				$base_url = ( strpos( $atts['url'], 'https://secure.wsu.edu' ) === false ) ? 'https://formtool.wsu.edu/' : 'https://secure.wsu.edu/';
+
+				$group = str_replace( $base_url, '', $url_data[0] );
 
 				$group = explode( '/', $group );
 
@@ -86,6 +88,8 @@ class WSUWP_Embeds {
 					$form_id = $parse_string['formid'];
 
 					$form_group = $group;
+
+					$domain = $base_url;
 
 					ob_start();
 
