@@ -39,7 +39,45 @@ class WSUWP_Embeds {
 		add_shortcode( 'vcea_couglink', array( $this, 'display_vcea_couglink' ) );
 		add_shortcode( 'vcea_skyforge', array( $this, 'display_vcea_skyforge' ) );
 		add_shortcode( 'formtool', array( $this, 'display_formtool_shortcode' ), 10, 3 );
+		add_shortcode( 'slateform', array( $this, 'display_slateform_shortcode' ), 10, 3 );
 	}
+
+
+	/**
+	 * Adds a slateform shortcode for emeding slate forms
+	 *
+	 * @since 0.13.0
+	 *
+	 * @param array $atts Array of shortcode attributes
+	 * @param string|null $content Shortcode content
+	 * @param string $tag Shortcode tag
+	 *
+	 */
+	public function display_slateform_shortcode( $atts, $content, $tag ) {
+
+		$html = '';
+
+		$default_atts = array(
+			'id'    => '',
+		);
+
+		$atts = shortcode_atts( $default_atts, $atts );
+
+		if ( ! empty( $atts['id'] ) ) {
+
+			$form_id = $atts['id'];
+
+			ob_start();
+
+			include dirname( dirname( __FILE__ ) ) . '/displays/slateform.php';
+
+			$html = ob_get_clean();
+
+		} // End if
+
+		return $html;
+
+	} // End display_formtool_shortcode
 
 
 	/**
