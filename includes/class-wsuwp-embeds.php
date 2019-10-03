@@ -7,6 +7,7 @@ class WSUWP_Embeds {
 	 * @var WSUWP_Embeds
 	 */
 	private static $instance;
+	private static $version = '1.0.0';
 
 	/**
 	 * Maintains and returns the one instance. Initiate hooks when
@@ -21,7 +22,21 @@ class WSUWP_Embeds {
 			self::$instance = new WSUWP_Embeds();
 			self::$instance->setup_hooks();
 		}
+
 		return self::$instance;
+	}
+
+
+	public static function get_version() {
+		return self::$version;
+	}
+
+	public static function get_plugin_url() {
+		return plugin_dir_url( dirname( __FILE__ ) );
+	}
+
+	public static function get_plugin_path() {
+		return plugin_dir_path( dirname( __FILE__ ) );
 	}
 
 	/**
@@ -39,7 +54,10 @@ class WSUWP_Embeds {
 		add_shortcode( 'vcea_couglink', array( $this, 'display_vcea_couglink' ) );
 		add_shortcode( 'vcea_skyforge', array( $this, 'display_vcea_skyforge' ) );
 		add_shortcode( 'formtool', array( $this, 'display_formtool_shortcode' ), 10, 3 );
+		// Embed code for slate forms requested by Admissions
 		add_shortcode( 'slateform', array( $this, 'display_slateform_shortcode' ), 10, 3 );
+		// Embed code for FATV requested by SFS
+		add_shortcode( 'fatv', array( $this, 'display_fatv_shortcode' ), 10, 3 );
 	}
 
 
@@ -78,6 +96,43 @@ class WSUWP_Embeds {
 		return $html;
 
 	} // End display_formtool_shortcode
+
+
+	/**
+	 * Adds a fatv shortcode for emeding videos
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $atts Array of shortcode attributes
+	 * @param string|null $content Shortcode content
+	 * @param string $tag Shortcode tag
+	 *
+	 */
+	public function display_fatv_shortcode( $atts, $content, $tag ) {
+
+		$html = '';
+
+		$default_atts = array(
+			'id' => '',
+		);
+
+		$atts = shortcode_atts( $default_atts, $atts );
+
+		if ( ! empty( $atts['id'] ) ) {
+
+			$playlist_id = $atts['id'];
+
+			ob_start();
+
+			include self::get_plugin_path() . '/displays/fatv-embed.php';
+
+			$html = ob_get_clean();
+
+		} // End if
+
+		return $html;
+
+	} // End display_fatv_shortcode
 
 
 	/**
