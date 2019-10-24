@@ -113,14 +113,20 @@ class WSUWP_Embeds {
 		$html = '';
 
 		$default_atts = array(
-			'id' => '',
+			'id'   => '',
+			'type' => 'playlist',
+			'key'  => '',
 		);
 
 		$atts = shortcode_atts( $default_atts, $atts );
 
-		if ( ! empty( $atts['id'] ) ) {
+		if ( ! empty( $atts['key'] ) && ! empty( $atts['id'] ) ) {
 
 			$playlist_id = $atts['id'];
+
+			$playlist_key = $atts['key'];
+
+			$type = ( 'playlist' === $atts['type'] ) ? 'script-playlist-ng' : 'script';
 
 			ob_start();
 

@@ -28,7 +28,12 @@ Extends the WSUWP Platform to include support for various embeds.
     * `height` - Defaults to 600.
     * `responsive` - Set to any value to make the iframe responsive. Blank by default.
 * `[formtool]` - to embed formtool forms
-    * `url` - The URL for the form. 
+    * `url` - The URL for the form.
+* `[fatv]` - to embed formtool forms
+    * `id` - Id (iid) for the account. script type="text/javascript" src="https://embed.financialaidtv.com/cms/embed/script/381?iid=**86317**&amp;hd=1&amp;dim=responsive&amp;language=en"
+    * `key` - Video or playlist key. script type="text/javascript" src="https://embed.financialaidtv.com/cms/embed/script/**381**?iid=86317&amp;hd=1&amp;dim=responsive&amp;language=en"
+    * `type` - Single video or playlist. Supports "**playlist** (/script-playlist-ng/)" or "**video** (/srcipt/)".
+    * Example: **[fatv id="86317" key="381" type="video"]**
 
 ## Twitter Timeline
 
