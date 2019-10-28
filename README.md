@@ -34,6 +34,11 @@ Extends the WSUWP Platform to include support for various embeds.
     * `key` - Video or playlist key. script type="text/javascript" src="https://embed.financialaidtv.com/cms/embed/script/**381**?iid=86317&amp;hd=1&amp;dim=responsive&amp;language=en"
     * `type` - Single video or playlist. Supports "**playlist** (/script-playlist-ng/)" or "**video** (/srcipt/)".
     * Example: **[fatv id="86317" key="381" type="video"]**
+* `[wsuwp_powerbi]` to embed iframes.
+    * `[path]` - Required | The relative path of the page to embed. Everything that follows https://app.powerbi.com/
+        * Example: app.powerbi.com/**view?r=eyJrIjoiYTRjMDU2MTc..etc....**
+    * `width`- Optional | Defaults to 100%.
+    * `height` - Optional | Defaults to 800px.
 
 ## Twitter Timeline
 
