@@ -263,6 +263,10 @@ class WSUWP_Embeds {
 		if ( apply_filters( 'wsuwp_embeds_enable_iframes', true ) ) {
 			require_once( dirname( __FILE__ ) . '/wsu-embed-iframes.php' );
 		}
+
+		if ( apply_filters( 'wsuwp_embeds_enable_power_bi', true ) ) {
+			require_once( dirname( __FILE__ ) . '/wsu-embed-powerbi.php' );
+		}
 	}
 
 	public function display_vcea_couglink() {
