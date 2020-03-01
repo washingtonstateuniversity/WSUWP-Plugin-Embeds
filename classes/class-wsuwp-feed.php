@@ -14,6 +14,7 @@ class WSUWP_Feed {
 		'show_post_title'     => '1',
 		'show_image'          => '1',
 		'show_post_meta'      => 'date,author',
+		'wpautop'             => '',
 	);
 
 	public static function render_shortcode( $atts ) {
