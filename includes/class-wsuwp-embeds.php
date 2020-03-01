@@ -7,7 +7,7 @@ class WSUWP_Embeds {
 	 * @var WSUWP_Embeds
 	 */
 	private static $instance;
-	private static $version = '1.0.0';
+	private static $version = '1.3.0';
 
 	/**
 	 * Maintains and returns the one instance. Initiate hooks when
@@ -39,12 +39,19 @@ class WSUWP_Embeds {
 		return plugin_dir_path( dirname( __FILE__ ) );
 	}
 
+	public static function get_template_path() {
+		return plugin_dir_path( dirname( __FILE__ ) ) . '/template-parts/';
+	}
+
 	/**
 	 * Setup hooks to include.
 	 *
 	 * @since 0.9.0
 	 */
 	public function setup_hooks() {
+
+		require_once self::get_plugin_path() . '/classes/class-wsuwp-feed.php';
+
 		add_action( 'init', array( $this, 'setup_embeds' ), 2 );
 		add_shortcode( 'qualtrics', array( $this, 'display_qualtrics_shortcode' ) );
 		add_shortcode( 'qualtrics_multi', array( $this, 'display_qualtrics_multi_shortcode' ) );
@@ -58,6 +65,8 @@ class WSUWP_Embeds {
 		add_shortcode( 'slateform', array( $this, 'display_slateform_shortcode' ), 10, 3 );
 		// Embed code for FATV requested by SFS
 		add_shortcode( 'fatv', array( $this, 'display_fatv_shortcode' ), 10, 3 );
+		// Add shortcode for wsuwp_feed
+		add_shortcode( 'wsuwp_feed', 'WSUWP_Feed::render_shortcode' );
 	}
 
 
