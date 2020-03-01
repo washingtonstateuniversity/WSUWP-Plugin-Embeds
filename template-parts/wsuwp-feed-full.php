@@ -15,6 +15,10 @@
 		</div>
 	</header>
 	<div class="wsu-c-wsuwp-feed__article__content">
-		<?php the_content(); ?>
+		<?php if ( ! empty( $atts['wpautop'] ) ) : ?>
+			<?php echo apply_filters( 'wpautop', get_the_content() ); ?>
+		<?php else : ?>
+			<?php the_content(); ?>
+		<?php endif; ?>
 	</div>
 </article>
