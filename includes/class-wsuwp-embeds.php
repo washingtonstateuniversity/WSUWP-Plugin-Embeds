@@ -65,6 +65,10 @@ class WSUWP_Embeds {
 		add_shortcode( 'slateform', array( $this, 'display_slateform_shortcode' ), 10, 3 );
 		// Embed code for FATV requested by SFS
 		add_shortcode( 'fatv', array( $this, 'display_fatv_shortcode' ), 10, 3 );
+		add_shortcode( 'wsu_embeds_post_title', array( $this, 'get_the_title') );
+		add_shortcode( 'wsu_embeds_post_permalink', array( $this, 'get_the_permalink') );
+		// Allow shortcodes in widget_text
+		add_filter( 'widget_text', 'do_shortcode');
 		// Add shortcode for wsuwp_feed
 		add_shortcode( 'wsuwp_feed', 'WSUWP_Feed::render_shortcode' );
 	}
@@ -449,5 +453,27 @@ class WSUWP_Embeds {
 		ob_end_clean();
 
 		return $content;
+	}
+
+	/**
+	 * Display get_the_permalink
+	 *
+	 * @return string
+	 */
+	public function get_the_title() {
+		$the_title = get_the_title(get_the_ID());
+
+		return $the_title;
+	}
+
+	/**
+	 * Display the_title
+	 *
+	 * @return string
+	 */
+	public function get_the_permalink() {
+		$the_permalink = get_the_permalink(get_the_ID());
+
+		return $the_permalink;
 	}
 }
