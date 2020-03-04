@@ -453,8 +453,7 @@ class WSUWP_Embeds {
 	 * @return string
 	 */
 	public function get_the_title() {
-		global $wp_query;
-		$the_title = get_the_title($wp_query->post->ID);
+		$the_title = get_the_title(get_the_ID());
 
 		return $the_title;
 	}
@@ -465,8 +464,7 @@ class WSUWP_Embeds {
 	 * @return string
 	 */
 	public function get_the_permalink() {
-		global $wp_query;
-		$the_permalink = get_the_permalink($wp_query->post->ID);
+		$the_permalink = get_the_permalink(get_the_ID());
 
 		return $the_permalink;
 	}
