@@ -18,6 +18,9 @@ class Shortcode_WSUWP_Feed {
 		'categories'          => '',
 		'format'              => '',
 		'show_toc'            => '',
+		'exclude'             => '',
+		'orderby'             => 'date',
+		'order'               => 'DESC',
 	);
 
 
@@ -74,6 +77,9 @@ class Shortcode_WSUWP_Feed {
 				switch ( $atts['display'] ) {
 					case 'full':
 						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/full.php';
+						break;
+					case 'button-excerpts':
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/button-excerpts.php';
 						break;
 					case 'titles':
 						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/titles.php';
@@ -266,6 +272,8 @@ class Shortcode_WSUWP_Feed {
 			'post_type'      => ( ! empty( $atts['post_type'] ) ) ? $atts['post_type'] : 'post',
 			'posts_per_page' => ( ! empty( $atts['count'] ) ) ? $atts['count'] : 10,
 			'post_status'    => 'publish',
+			'orderby'        => ( ! empty( $atts['orderby'] ) ) ? $atts['orderby'] : 'date',
+			'order'          => ( ! empty( $atts['order'] ) ) ? $atts['order'] : 'DESC',
 		);
 
 		if ( ! empty( $atts['categories'] ) ) {
