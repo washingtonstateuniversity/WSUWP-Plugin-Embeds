@@ -1,6 +1,6 @@
 <?php
 
-class WSUWP_Feed {
+class Shortcode_WSUWP_Feed {
 
 	protected static $shortcode = 'wsuwp_feed';
 	protected static $default_atts = array(
@@ -18,11 +18,24 @@ class WSUWP_Feed {
 		'categories'          => '',
 		'format'              => '',
 		'show_toc'            => '',
+		'exclude'             => '',
+		'orderby'             => 'date',
+		'order'               => 'DESC',
 	);
+
+
+	public function init() {
+
+		add_shortcode( 'wsuwp_feed', __CLASS__ . '::render_shortcode' );
+
+	}
+
 
 	public static function render_shortcode( $atts ) {
 
 		$content = '';
+
+		$content .= '<div class="wsu-c-wsuwp-feed__wrapper">';
 
 		$atts = shortcode_atts( self::$default_atts, $atts, self::$shortcode );
 
@@ -33,12 +46,14 @@ class WSUWP_Feed {
 		switch ( $atts['format'] ) {
 
 			case 'by-category':
-				$content = self::get_posts_by_category( $query_args, $atts );
+				$content .= self::get_posts_by_category( $query_args, $atts );
 				break;
 			default:
-				$content = self::get_posts( $query_args, $atts );
+				$content .= self::get_posts( $query_args, $atts );
 				break;
 		}
+
+		$content .= '</div>';
 
 		return $content;
 
@@ -61,12 +76,19 @@ class WSUWP_Feed {
 
 				switch ( $atts['display'] ) {
 					case 'full':
-						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed-full.php';
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/full.php';
+						break;
+					case 'button-excerpts':
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/button-excerpts.php';
+						break;
+					case 'titles':
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/titles.php';
 						break;
 				}
 
 				$content .= ob_get_clean();
 			}
+
 		}
 
 		/* Restore original Post Data */
@@ -174,7 +196,10 @@ class WSUWP_Feed {
 
 				switch ( $atts['display'] ) {
 					case 'full':
-						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed-full.php';
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/full.php';
+						break;
+					case 'titles':
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/titles.php';
 						break;
 				}
 
@@ -183,6 +208,7 @@ class WSUWP_Feed {
 					'title'   => get_the_title(),
 					'content' => ob_get_clean(),
 					'slug'    => $the_query->post->post_name,
+					'link'    => get_the_permalink(),
 				);
 			}
 		}
@@ -246,6 +272,8 @@ class WSUWP_Feed {
 			'post_type'      => ( ! empty( $atts['post_type'] ) ) ? $atts['post_type'] : 'post',
 			'posts_per_page' => ( ! empty( $atts['count'] ) ) ? $atts['count'] : 10,
 			'post_status'    => 'publish',
+			'orderby'        => ( ! empty( $atts['orderby'] ) ) ? $atts['orderby'] : 'date',
+			'order'          => ( ! empty( $atts['order'] ) ) ? $atts['order'] : 'DESC',
 		);
 
 		if ( ! empty( $atts['categories'] ) ) {
@@ -258,3 +286,5 @@ class WSUWP_Feed {
 
 	}
 }
+
+(new Shortcode_WSUWP_Feed )->init();

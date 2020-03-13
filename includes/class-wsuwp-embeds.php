@@ -21,6 +21,7 @@ class WSUWP_Embeds {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new WSUWP_Embeds();
 			self::$instance->setup_hooks();
+			self::$instance->add_shortcodes();
 		}
 
 		return self::$instance;
@@ -43,14 +44,23 @@ class WSUWP_Embeds {
 		return plugin_dir_path( dirname( __FILE__ ) ) . '/template-parts/';
 	}
 
+		/**
+	 * Add shortcodes 
+	 *
+	 * @since 1.3.0
+	 */
+	public function add_shortcodes() {
+
+		require_once __DIR__ . '/includes-shortcode-wsuwp-feed.php';
+
+	}
+
 	/**
 	 * Setup hooks to include.
 	 *
 	 * @since 0.9.0
 	 */
 	public function setup_hooks() {
-
-		require_once self::get_plugin_path() . '/classes/class-wsuwp-feed.php';
 
 		add_action( 'init', array( $this, 'setup_embeds' ), 2 );
 		add_shortcode( 'qualtrics', array( $this, 'display_qualtrics_shortcode' ) );
@@ -69,8 +79,7 @@ class WSUWP_Embeds {
 		add_shortcode( 'wsu_embeds_post_permalink', array( $this, 'get_the_permalink') );
 		// Allow shortcodes in widget_text
 		add_filter( 'widget_text', 'do_shortcode');
-		// Add shortcode for wsuwp_feed
-		add_shortcode( 'wsuwp_feed', 'WSUWP_Feed::render_shortcode' );
+
 	}
 
 

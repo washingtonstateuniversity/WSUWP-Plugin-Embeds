@@ -1,4 +1,4 @@
-<article class="wsu-c-wsuwp-feed__article">
+<article class="wsu-c-wsuwp-feed__article wsu-c-wsuwp-feed__display-<?php echo esc_attr( $atts['display'] ); ?>">
 	<header class="wsu-c-wsuwp-feed__article__header">
 		<<?php echo esc_attr( $atts['title_tag'] ); ?> class="wsu-c-wsuwp-feed__article__title" id="post-<?php echo esc_attr( get_the_ID() ); ?>"><?php the_title(); ?></<?php echo esc_attr( $atts['title_tag'] ); ?>>
 		<div class="wsu-c-wsuwp-feed__article__meta">
