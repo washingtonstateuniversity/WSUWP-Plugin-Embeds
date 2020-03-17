@@ -149,7 +149,7 @@ class Shortcode_WSUWP_Feed {
 
 						$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $child['name'] . '</h2><div class="wsu-c-wp_feed__section__wrapper">';
 
-						$toc .= '<h2 class="wsu-c-wp_feed__toc__title">' . $child['name'] . '</h2><ul>';
+						$toc .= '<h2 id="wsu-toc-cat-' . $category['id'] . '" class="wsu-c-wp_feed__toc__title">' . $child['name'] . '</h2><ul>';
 
 						foreach ( $child_category_posts as $child_post ) {
 
