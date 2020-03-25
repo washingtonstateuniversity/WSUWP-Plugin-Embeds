@@ -149,7 +149,7 @@ class Shortcode_WSUWP_Feed {
 
 				$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $category['name'] . '</h2>';
 
-				$toc .= '<h2 id="wsu-toc-cat-' . $category['id'] . '" class="wsu-c-wp_feed__toc__title">' . $category['name'] . '</h2><ul>';
+				$toc .= '<div class="wsu-c-wp_feed__toc__wrapper"><h2 id="wsu-toc-cat-' . $category['id'] . '" class="wsu-c-wp_feed__toc__title">' . $category['name'] . '</h2><ul>';
 
 				foreach ( $category_posts as $post ) {
 
@@ -159,7 +159,7 @@ class Shortcode_WSUWP_Feed {
 
 				}
 
-				$toc .= '</ul>';
+				$toc .= '</ul></div>';
 
 				$content .= '</div>';
 			}
@@ -178,7 +178,7 @@ class Shortcode_WSUWP_Feed {
 
 						$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $child['name'] . '</h2>';
 
-						$toc .= '<h2 id="wsu-toc-cat-' . $child['id'] . '" class="wsu-c-wp_feed__toc__title">' . $child['name'] . '</h2><ul>';
+						$toc .= '<div class="wsu-c-wp_feed__toc__wrapper"><h2 id="wsu-toc-cat-' . $child['id'] . '" class="wsu-c-wp_feed__toc__title">' . $child['name'] . '</h2><ul>';
 
 						foreach ( $child_category_posts as $child_post ) {
 
@@ -188,7 +188,7 @@ class Shortcode_WSUWP_Feed {
 
 						}
 
-						$toc .= '</ul>';
+						$toc .= '</ul></div>';
 
 						$content .= '</div>';
 					}
