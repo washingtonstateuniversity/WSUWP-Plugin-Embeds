@@ -2,7 +2,7 @@
 
 class Shortcode_WSUWP_Feed {
 
-	protected static $shortcode = 'wsuwp_feed';
+	protected static $shortcode    = 'wsuwp_feed';
 	protected static $default_atts = array(
 		'post_type'           => 'post',
 		'category'            => '',
@@ -14,6 +14,7 @@ class Shortcode_WSUWP_Feed {
 		'show_post_title'     => '1',
 		'show_image'          => '1',
 		'show_post_meta'      => 'date,author',
+		'show'                => 'image,title,excerpt,date',
 		'wpautop'             => '',
 		'categories'          => '',
 		'format'              => '',
@@ -21,6 +22,8 @@ class Shortcode_WSUWP_Feed {
 		'exclude'             => '',
 		'orderby'             => 'date',
 		'order'               => 'DESC',
+		'wrapper_class'       => 'wsu-c-wsuwp-feed__wrapper',
+		'items_per_row'       => '3',
 	);
 
 
@@ -35,11 +38,15 @@ class Shortcode_WSUWP_Feed {
 
 		$content = '';
 
-		$content .= '<div class="wsu-c-wsuwp-feed__wrapper">';
-
 		$atts = shortcode_atts( self::$default_atts, $atts, self::$shortcode );
 
+		$atts = self::parse_atts( $atts );
+
 		$atts['show_post_meta'] = explode( ',', $atts['show_post_meta'] );
+
+		$atts['show'] = explode( ',', $atts['show'] );
+
+		$content .= '<div class="' . $atts['wrapper_class'] . '">';
 
 		$query_args = self::get_query( $atts );
 
@@ -56,6 +63,21 @@ class Shortcode_WSUWP_Feed {
 		$content .= '</div>';
 
 		return $content;
+
+	}
+
+
+	protected static function parse_atts( $atts ) {
+
+		if ( 'cards' === $atts['display'] ) {
+
+			$atts['wrapper_class'] .= ' wsu-c-cards__wrapper';
+
+			$atts['wrapper_class'] .= ' wsu-c-cards__items-per-row--' . $atts['items_per_row'];
+
+		}
+
+		return $atts;
 
 	}
 
@@ -83,6 +105,9 @@ class Shortcode_WSUWP_Feed {
 						break;
 					case 'titles':
 						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/titles.php';
+						break;
+					case 'cards':
+						include WSUWP_Embeds::get_template_path() . '/wsuwp-feed/card.php';
 						break;
 				}
 
@@ -120,7 +145,9 @@ class Shortcode_WSUWP_Feed {
 
 			if ( ! empty( $category_posts ) ) {
 
-				$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $category['name'] . '</h2><div class="wsu-c-wp_feed__section__wrapper">';
+				$content .= '<div class="wsu-c-wp_feed__section__wrapper">';
+
+				$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $category['name'] . '</h2>';
 
 				$toc .= '<h2 id="wsu-toc-cat-' . $category['id'] . '" class="wsu-c-wp_feed__toc__title">' . $category['name'] . '</h2><ul>';
 
@@ -147,7 +174,9 @@ class Shortcode_WSUWP_Feed {
 
 					if ( ! empty( $child_category_posts ) ) {
 
-						$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $child['name'] . '</h2><div class="wsu-c-wp_feed__section__wrapper">';
+						$content .= '<div class="wsu-c-wp_feed__section__wrapper">';
+
+						$content .= '<h2 class="wsu-c-wp_feed__section__title">' . $child['name'] . '</h2>';
 
 						$toc .= '<h2 id="wsu-toc-cat-' . $child['id'] . '" class="wsu-c-wp_feed__toc__title">' . $child['name'] . '</h2><ul>';
 
