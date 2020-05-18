@@ -7,7 +7,7 @@ class WSUWP_Embeds {
 	 * @var WSUWP_Embeds
 	 */
 	private static $instance;
-	private static $version = '1.3.0';
+	private static $version = '1.5.0';
 
 	/**
 	 * Maintains and returns the one instance. Initiate hooks when
@@ -44,8 +44,8 @@ class WSUWP_Embeds {
 		return plugin_dir_path( dirname( __FILE__ ) ) . '/template-parts/';
 	}
 
-		/**
-	 * Add shortcodes 
+	/**
+	 * Add shortcodes
 	 *
 	 * @since 1.3.0
 	 */
@@ -288,6 +288,10 @@ class WSUWP_Embeds {
 
 		if ( apply_filters( 'wsuwp_embeds_enable_power_bi', true ) ) {
 			require_once( dirname( __FILE__ ) . '/wsu-embed-powerbi.php' );
+		}
+
+		if ( apply_filters( 'wsuwp_embeds_enable_photo_carousel', true ) ) {
+			require_once( dirname( __FILE__ ) . '/wsu-embed-photo-carousel.php' );
 		}
 	}
 
