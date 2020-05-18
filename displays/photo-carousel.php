@@ -37,7 +37,47 @@
 
 		background-size: cover;
 		background-position: 50% 50%;
+	}
 
+	/* Navigation */
+	.swiper-container .swiper-button-next,
+	.swiper-container .swiper-button-prev {
+		background: hsl(0, 0%, 100%);
+		color: hsl(0, 0%, 30%);
+		padding: 1em .5em 1em .8em;
+		box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+		transition: 300ms ease-in-out color;
+	}
+
+	.swiper-container .swiper-button-next:after,
+	.swiper-container .swiper-button-prev:after {
+		font-size: 1.8em;
+	}
+
+	.swiper-container .swiper-button-next:hover,
+	.swiper-container .swiper-button-prev:hover,
+	.swiper-container .swiper-button-next:active,
+	.swiper-container .swiper-button-prev:active {
+		color: #ca1237;
+	}
+
+	.swiper-container .swiper-button-next {
+		right: 0;
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		padding: 1em .5em 1em .8em;
+	}
+
+	.swiper-container .swiper-button-prev {
+		left: 0;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 1em .8em 1em .5em;
+	}
+
+	/* Pagination */
+	.swiper-container .swiper-pagination-bullet-active {
+		background: #ca1237;
 	}
 </style>
 
