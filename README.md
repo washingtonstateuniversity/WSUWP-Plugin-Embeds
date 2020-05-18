@@ -39,7 +39,7 @@ Extends the WSUWP Platform to include support for various embeds.
         * Example: app.powerbi.com/**view?r=eyJrIjoiYTRjMDU2MTc..etc....**
     * `width`- Optional | Defaults to 100%.
     * `height` - Optional | Defaults to 800px.
-* `[wsuwp_photo_carousel]` to embed photo carousels.
+* `[wsuwp_photo_carousel]` to embed a swiper.js powered photo carousels.
     * `ids` - IDs for the images to be displayed in the carousel. Accepts a comma separated list of values. Must include at least one. Works best with at least 6.
     * `name` - Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
 
