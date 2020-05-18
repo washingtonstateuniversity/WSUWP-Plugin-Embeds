@@ -289,6 +289,10 @@ class WSUWP_Embeds {
 		if ( apply_filters( 'wsuwp_embeds_enable_power_bi', true ) ) {
 			require_once( dirname( __FILE__ ) . '/wsu-embed-powerbi.php' );
 		}
+
+		if ( apply_filters( 'wsuwp_embeds_enable_photo_carousel', true ) ) {
+			require_once( dirname( __FILE__ ) . '/wsu-embed-photo-carousel.php' );
+		}
 	}
 
 	public function display_vcea_couglink() {
