@@ -21,7 +21,9 @@ class WSUWP_Embed_Photo_Carousel {
 		// Set Defaults
 		$default_atts = array(
 			'ids'  => '',
-			'name' => ''
+			'name' => '',
+			'image_size' => 'medium',
+			'random_order' => false
 		);
 
 		$atts = shortcode_atts( $default_atts, $atts );
@@ -29,7 +31,13 @@ class WSUWP_Embed_Photo_Carousel {
 		if ( ! empty( $atts['ids'] ) ) {
 
 			$ids  = explode(',', $atts['ids']);
+
+			if ($atts['random_order'] == true) {
+				shuffle($ids);
+			}
+
 			$name = ($atts['name'] !== '')? $atts['name'] : 'page-id-' . get_the_ID();
+			$image_size = $atts['image_size'];
 
 			ob_start();
 
