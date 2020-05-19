@@ -3,6 +3,7 @@
 /**
  * @var $ids array IDs for the images to be displayed in the carousel
  * @var $name string Returns the name of the current instance from the shortcode params or the current page id (limits usage to one per page)
+ * @var $image_size string Image size identifier, ‘thumb’, ‘thumbnail’, ‘medium’, ‘large’, ‘post-thumbnail’, or any custom image sizes
  */
 ?>
 
@@ -81,14 +82,13 @@
 	}
 </style>
 
-<div id="swiper" class="swiper-container swiper_<?php echo $name; ?>">
+<div id="swiper" class="swiper-container swiper_<?php echo esc_attr($name); ?>">
 	<div class="swiper-wrapper">
 		<?php foreach ($ids as $photo_id) : ?>
-
 			<?php
-			$image_url = wp_get_attachment_image_src($photo_id, 'large')[0];
+			$image_url = wp_get_attachment_image_src($photo_id, $image_size)[0];
 			?>
-			<div class="swiper-slide" style="background-image:url('<?php echo $image_url;?>')"></div>
+			<div class="swiper-slide" style="background-image:url('<?php echo esc_attr($image_url);?>')"></div>
 		<?php endforeach; ?>
 	</div>
 
@@ -101,11 +101,9 @@
 </div>
 <!-- Swiper End -->
 
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-	const swiper = new Swiper('.swiper_<?php echo $name; ?>', {
+	const swiper = new Swiper('.swiper_<?php echo esc_js($name); ?>', {
 		slidesPerView: 3,
 		slidesPerColumn: 2,
 		spaceBetween: 0,
