@@ -42,6 +42,8 @@ Extends the WSUWP Platform to include support for various embeds.
 * `[wsuwp_photo_carousel]` to embed a swiper.js powered photo carousels.
     * `ids` - IDs for the images to be displayed in the carousel. Accepts a comma separated list of values. Must include at least one. Works best with at least 6.
     * `name` - Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
+    * `image_size` - Image size identifier, ‘thumb’, ‘thumbnail’, ‘medium’, ‘large’, ‘post-thumbnail’, or any custom image sizes
+    * `random_order` - Default false. Set to true to randomize the order in which the photos display in the carousel
 
 ## Twitter Timeline
 
