@@ -88,7 +88,7 @@
 			<?php
 			$image_url = wp_get_attachment_image_src($photo_id, $image_size)[0];
 			?>
-			<div class="swiper-slide" style="background-image:url('<?php echo esc_attr($image_url);?>')"></div>
+			<div class="swiper-slide" style="background-image:url('<?php echo esc_url($image_url);?>')"></div>
 		<?php endforeach; ?>
 	</div>
 
