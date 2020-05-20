@@ -100,7 +100,7 @@
 			<?php foreach ($ids as $photo_id) : ?>
 				<?php $image_url = wp_get_attachment_image_src($photo_id, $image_size)[0]; ?>
 
-			<div class="swiper-slide swiper-lazy" data-background="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-url="<?php echo esc_url($image_url);?>" <?php endif; ?>>
+				<div class="swiper-slide swiper-lazy" data-background="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-url="<?php echo esc_url($image_url);?>" <?php endif; ?>>
 					<div class="swiper-lazy-preloader"></div>
 				</div>
 			<?php endforeach; ?>
