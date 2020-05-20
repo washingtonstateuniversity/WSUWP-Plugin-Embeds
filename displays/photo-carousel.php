@@ -27,7 +27,7 @@
 		text-align: center;
 		font-size: 18px;
 		background: #fff;
-		height: calc((100% - <?php echo esc_html($space_between);?>px) / 2);
+		height: calc((100% - <?php echo esc_html($space_between);?>px) / <?php echo esc_html($slides_per_column);?>);
 
 		/* Center slide text vertically */
 		display: -webkit-box;
