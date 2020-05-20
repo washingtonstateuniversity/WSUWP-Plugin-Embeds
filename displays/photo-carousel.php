@@ -27,7 +27,8 @@
 		text-align: center;
 		font-size: 18px;
 		background: #fff;
-		height: calc((100% - <?php echo esc_html($space_between);?>px) / <?php echo esc_html($slides_per_column);?>);
+		height: 100%;
+
 
 		/* Center slide text vertically */
 		display: -webkit-box;
@@ -45,6 +46,11 @@
 
 		background-size: cover;
 		background-position: 50% 50%;
+	}
+
+
+	#swiper.swiper_<?php echo esc_html($name); ?> .swiper-slide{
+		height: calc((100% - <?php echo esc_html($space_between * ($slides_per_column - 1));?>px) / <?php echo esc_html($slides_per_column);?>);
 	}
 
 	#swiper .swiper-slide[data-url]:hover {
