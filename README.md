@@ -44,6 +44,13 @@ Extends the WSUWP Platform to include support for various embeds.
     * `name` - Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
     * `image_size` - Image size identifier, ‘thumb’, ‘thumbnail’, ‘medium’, ‘large’, ‘post-thumbnail’, or any custom image sizes
     * `random_order` - Default false. Set to true to randomize the order in which the photos display in the carousel
+    * `slides_per_view` - Default 3. Number of slides per view (slides visible at the same time on slider's container).
+    * `slides_per_column` - Default 2. Number of slides per column, for multirow layout.
+    * `space_between` - Default 20. Distance between slides in px.
+    * `preload_images` - Default false. When enabled Swiper will force to load all images.
+    * `lazy` - Default true. Enables images lazy loading. If you use slidesPerView, then you should also enable watchSlidesVisibility and Swiper will load images in currently visible slides.
+    * `watch_slides_visibility` - Default true. Enable this option and slides that are in viewport will have additional visible class.
+    * `download_image_on_click` - Default false. Returns true or false, if the user whats the images to download on click.
 
 ## Twitter Timeline
 

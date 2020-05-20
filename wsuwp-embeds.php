@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: WSU Embeds
-Version: 1.5.0
+Version: 1.5.1
 Plugin URI: https://github.com/washingtonstateuniversity/WSUWP-Plugin-Embeds
 Description: Provides various embed codes supported on the WSUWP Platform.
-Author: washingtonstateuniversity, jeremyfelt
+Author: washingtonstateuniversity, jeremyfelt, danbleile, nicdford
 Author URI: https://web.wsu.edu/
 */
 

@@ -20,25 +20,65 @@ class WSUWP_Embed_Photo_Carousel {
 
 		// Set Defaults
 		$default_atts = array(
-			'ids'  => '',
-			'name' => '',
-			'image_size' => 'medium',
-			'random_order' => false
+			'ids'                     => '',
+			'name'                    => '',
+			'image_size'              => 'medium',
+			'random_order'            => true,
+			'slides_per_view'         => '3',
+			'slides_per_column'       => '2',
+			'space_between'           => '20',
+			'preload_images'          => 'false', // JS booleans must be strings to work with this method
+			'lazy'                    => 'true', // JS booleans must be strings to work with this method
+			'watch_slides_visibility' => 'true', // JS booleans must be strings to work with this method
+			'download_image_on_click' => false
 		);
 
 		$atts = shortcode_atts( $default_atts, $atts );
 
 		if ( ! empty( $atts['ids'] ) ) {
 
+			//
+			// Set Vars
+			//
 			$ids  = explode(',', $atts['ids']);
+			$name = ($atts['name'] !== '')? $atts['name'] : 'page-id-' . get_the_ID();
+			$image_size = $atts['image_size'];
+			$random_order = $atts['random_order'];
+			$slides_per_view = $atts['slides_per_view'];
+			$slides_per_column = $atts['slides_per_column'];
+			$space_between = $atts['space_between'];
+			$preload_images = $atts['preload_images'];
+			$lazy = $atts['lazy'];
+			$watch_slides_visibility = $atts['watch_slides_visibility'];
+			$download_image_on_click = $atts['download_image_on_click'];
 
-			if ($atts['random_order'] == true) {
+			//
+			// Process any Vars as needed
+			//
+
+			// Shuffle array if random_order is desired
+			if ($random_order) {
 				shuffle($ids);
 			}
 
-			$name = ($atts['name'] !== '')? $atts['name'] : 'page-id-' . get_the_ID();
-			$image_size = $atts['image_size'];
+			// Preload images if lazy loading is disabled
+			if ( $lazy == 'false' ) {
+				$preload_images = 'true'; // JS booleans must be strings to work with this method
+			}
 
+			// Slides with multiple columns require that we watch for slides visibility
+			if ( $slides_per_column <= '1') {
+				$watch_slides_visibility = 'false'; // JS booleans must be strings to work with this method
+			}
+
+			// Strip out px if passed into value, only allowed to pass px values
+			if ( stripos($space_between, 'px') !== false){
+				$space_between = rtrim($space_between, 'px');
+			}
+
+			//
+			// Begin Output
+			//
 			ob_start();
 
 			include dirname( dirname( __FILE__ ) ) . '/displays/photo-carousel.php';
