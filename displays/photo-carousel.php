@@ -47,6 +47,10 @@
 		background-position: 50% 50%;
 	}
 
+	#swiper .swiper-slide[data-url]:hover {
+		cursor: pointer;
+	}
+
 	/* Navigation */
 	.swiper-container .swiper-button-next,
 	.swiper-container .swiper-button-prev {
@@ -96,7 +100,7 @@
 			<?php foreach ($ids as $photo_id) : ?>
 				<?php $image_url = wp_get_attachment_image_src($photo_id, $image_size)[0]; ?>
 
-				<div class="swiper-slide swiper-lazy" data-background="<?php echo esc_url($image_url);?>">
+			<div class="swiper-slide swiper-lazy" data-background="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-url="<?php echo esc_url($image_url);?>" <?php endif; ?>>
 					<div class="swiper-lazy-preloader"></div>
 				</div>
 			<?php endforeach; ?>
@@ -104,7 +108,7 @@
 			<?php foreach ($ids as $photo_id) : ?>
 				<?php $image_url = wp_get_attachment_image_src($photo_id, $image_size)[0]; ?>
 
-				<div class="swiper-slide" style="background-image:url('<?php echo esc_url($image_url);?>');"></div>
+				<div class="swiper-slide" style="background-image:url('<?php echo esc_url($image_url);?>');" <?php if ($download_image_on_click == 'true') : ?> data-url="<?php echo esc_url($image_url);?>" <?php endif; ?>></div>
 			<?php endforeach; ?>
 		<?php endif; ?>
 
@@ -121,8 +125,47 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-	const swiper = new Swiper('.swiper_<?php echo esc_js($name); ?>', {
 
+	// Force download download media
+	// https://stackoverflow.com/a/49500465
+
+	function forceDownload(blob, filename) {
+		var a = document.createElement('a');
+		a.download = filename;
+		a.href = blob;
+		// For Firefox https://stackoverflow.com/a/32226068
+		document.body.appendChild(a);
+		a.click();
+		a.remove();
+	}
+
+	// Current blob size limit is around 500MB for browsers
+	function downloadResource(url, filename) {
+	if (!filename) filename = url.split('\\').pop().split('/').pop();
+	fetch(url, {
+		headers: new Headers({
+			'Origin': location.origin
+		}),
+		mode: 'cors'
+		})
+		.then(response => response.blob())
+		.then(blob => {
+		let blobUrl = window.URL.createObjectURL(blob);
+		forceDownload(blobUrl, filename);
+		})
+		.catch(e => console.error(e));
+	}
+
+	const swiperSlides = document.querySelectorAll('.swiper-slide');
+
+	swiperSlides.forEach(slide => {
+		slide.addEventListener('click', (e) => {
+			e.preventDefault();
+			downloadResource(slide.dataset.url);
+		});
+	});
+
+	const swiper = new Swiper('.swiper_<?php echo esc_js($name); ?>', {
 		slidesPerView: <?php echo esc_js($slides_per_view); ?>,
 		slidesPerColumn: <?php echo esc_js($slides_per_column); ?>,
 		spaceBetween: <?php echo esc_js($space_between); ?>,
