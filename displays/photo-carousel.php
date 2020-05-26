@@ -1,18 +1,21 @@
 <?php
 
 /**
- * @var $ids						 array IDs for the images to be displayed in the carousel.
- * @var $name						 string Returns the name of the current instance from the shortcode params or the current page id (limits usage to one per page).
- * @var $image_size					 string Image size identifier. Default medium.
- * @var $slides_per_view			 string Number of slides per view (slides visible at the same time on slider's container).
- * @var $slides_per_column			 string Number of slides per column, for multirow layout.
- * @var $space_between				 string Distance between slides in px.
- * @var $preload_images				 string When enabled Swiper will force to load all images.
- * @var $lazy						 string Enables images lazy loading. If you use slidesPerView, then you should also enable watchSlidesVisibility and Swiper will load images in currently visible slides.
- * @var $watch_slides_visibility	 string Enable this option and slides that are in viewport will have additional visible class.
- * @var $download_image_on_click	 boolean Returns true or false, if the user whats the images to download on click.
- * @var $download_image_size		 string Image size identifier. Default full.
- * @var $pagination_type			 string The type of pagination to display. Can be "bullets", "fraction", or "progressbar". Default bullets.
+ * @var $ids						Required. Default null. IDs for the images to be displayed in the carousel.
+ * @var $name						Default null; Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
+ * @var $image_size					Default medium. Image size identifier.
+ * @var $random_order				Default false. Shuffles the order in which the ids are included into the shortcode.
+ * @var $slides_per_view			Default 3. Number of slides per view (slides visible at the same time on slider's container).
+ * @var $slides_per_column			Default 2. Number of slides per column, for multirow layout.
+ * @var $space_between				Default 20. Distance between slides in px.
+ * @var $preload_images				Default false. When enabled Swiper will force to load all images.
+ * @var $lazy						Default true. Enables images lazy loading. If you use slidesPerView, then you should also enable watchSlidesVisibility and Swiper will load images in currently visible slides.
+ * @var $watch_slides_visibility	Default true. Enable this option and slides that are in viewport will have additional visible class.
+ * @var $download_image_on_click	Default false. Returns true or false, if the user whats the images to download on click.
+ * @var $download_image_size		Default full. Image size identifier.
+ * @var $pagination_type			Default bullets. The type of pagination to display. Can be "bullets", "fraction", or "progressbar".
+ * @var $autoplay					Default true. Controls whether the slider should autoplay.
+ * @var $autoplay_delay				Default 3000. Controls the duration at which the carousel progresses to the next slide.
  */
 ?>
 
@@ -32,7 +35,6 @@
 	#swiper .swiper-slide {
 		text-align: center;
 		font-size: 18px;
-		background: #fff;
 		height: 100%;
 		object-fit: cover;
 		overflow: hidden;
@@ -128,6 +130,7 @@
 	.swiper-container.swiper-pagination-fraction {
 		width: initial;
 		left: 50%;
+		transform: translateX(-50%);
 		background: white;
 		border-radius: 5px;
 		padding: 0 7px 2px;

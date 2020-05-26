@@ -40,10 +40,10 @@ Extends the WSUWP Platform to include support for various embeds.
     * `width`- Optional | Defaults to 100%.
     * `height` - Optional | Defaults to 800px.
 * `[wsuwp_photo_carousel]` to embed a swiper.js powered photo carousels.
-    * `ids` - IDs for the images to be displayed in the carousel. Accepts a comma separated list of values. Must include at least one. Works best with at least 6.
-    * `name` - Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
-    * `image_size` - Image size identifier, ‘thumb’, ‘thumbnail’, ‘medium’, ‘large’, ‘post-thumbnail’, or any custom image sizes
-    * `random_order` - Default false. Set to true to randomize the order in which the photos display in the carousel
+    * `ids` - Required. Default null. IDs for the images to be displayed in the carousel.
+    * `name` - Default null; Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
+    * `image_size` - Default medium. Image size identifier.
+    * `random_order` - Default false. Shuffles the order in which the ids are included into the shortcode.
     * `slides_per_view` - Default 3. Number of slides per view (slides visible at the same time on slider's container).
     * `slides_per_column` - Default 2. Number of slides per column, for multirow layout.
     * `space_between` - Default 20. Distance between slides in px.
@@ -53,6 +53,8 @@ Extends the WSUWP Platform to include support for various embeds.
     * `download_image_on_click` - Default false. Returns true or false, if the user whats the images to download on click.
     * `download_image_size` - Default full. Image size identifier.
     * `pagination_type` - Default bullets. The type of pagination to display. Can be "bullets", "fraction", or "progressbar".
+    * `autoplay` - Default true. Controls whether the slider should autoplay.
+    * `autoplay_delay` - Default 3000. Controls the duration at which the carousel progresses to the next slide.
 
 
 ## Twitter Timeline
