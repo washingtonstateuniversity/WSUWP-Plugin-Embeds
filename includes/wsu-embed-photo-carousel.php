@@ -23,7 +23,7 @@ class WSUWP_Embed_Photo_Carousel {
 			'ids'                     => '',
 			'name'                    => '',
 			'image_size'              => 'medium',
-			'random_order'            => true,
+			'random_order'            => false,
 			'slides_per_view'         => '3',
 			'slides_per_column'       => '2',
 			'space_between'           => '20',
@@ -31,7 +31,10 @@ class WSUWP_Embed_Photo_Carousel {
 			'lazy'                    => 'true', // JS booleans must be strings to work with this method
 			'watch_slides_visibility' => 'true', // JS booleans must be strings to work with this method
 			'download_image_on_click' => false,
-			'download_image_size'     => 'full'
+			'download_image_size'     => 'full',
+			'pagination_type'         => 'bullets',
+			'autoplay'                => true,
+			'autoplay_delay'          => 3000
 		);
 
 		$atts = shortcode_atts( $default_atts, $atts );
@@ -53,6 +56,9 @@ class WSUWP_Embed_Photo_Carousel {
 			$watch_slides_visibility = $atts['watch_slides_visibility'];
 			$download_image_on_click = $atts['download_image_on_click'];
 			$download_image_size = $atts['download_image_size'];
+			$pagination_type = $atts['pagination_type'];
+			$autoplay = $atts['autoplay'];
+			$autoplay_delay = $atts['autoplay_delay'];
 
 			//
 			// Process any Vars as needed

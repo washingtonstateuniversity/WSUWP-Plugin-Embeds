@@ -1,22 +1,30 @@
 <?php
 
 /**
- * @var $ids						 array IDs for the images to be displayed in the carousel.
- * @var $name						 string Returns the name of the current instance from the shortcode params or the current page id (limits usage to one per page).
- * @var $image_size					 string Image size identifier. Default medium.
- * @var $slides_per_view			 string Number of slides per view (slides visible at the same time on slider's container).
- * @var $slides_per_column			 string Number of slides per column, for multirow layout.
- * @var $space_between				 string Distance between slides in px.
- * @var $preload_images				 string When enabled Swiper will force to load all images.
- * @var $lazy						 string Enables images lazy loading. If you use slidesPerView, then you should also enable watchSlidesVisibility and Swiper will load images in currently visible slides.
- * @var $watch_slides_visibility	 string Enable this option and slides that are in viewport will have additional visible class.
- * @var $download_image_on_click	 boolean Returns true or false, if the user whats the images to download on click.
- * @var $download_image_size		 string Image size identifier. Default full.
+ * @var $ids						Required. Default null. IDs for the images to be displayed in the carousel.
+ * @var $name						Default null; Returns the name of the current instance from the shortcode params or the current page id. Allows for site-wide customization or carousel specific styles. Example `#swiper.swiper_page-id-2 { background: crimson }` to change all sliders on the page.
+ * @var $image_size					Default medium. Image size identifier.
+ * @var $random_order				Default false. Shuffles the order in which the ids are included into the shortcode.
+ * @var $slides_per_view			Default 3. Number of slides per view (slides visible at the same time on slider's container).
+ * @var $slides_per_column			Default 2. Number of slides per column, for multirow layout.
+ * @var $space_between				Default 20. Distance between slides in px.
+ * @var $preload_images				Default false. When enabled Swiper will force to load all images.
+ * @var $lazy						Default true. Enables images lazy loading. If you use slidesPerView, then you should also enable watchSlidesVisibility and Swiper will load images in currently visible slides.
+ * @var $watch_slides_visibility	Default true. Enable this option and slides that are in viewport will have additional visible class.
+ * @var $download_image_on_click	Default false. Returns true or false, if the user whats the images to download on click.
+ * @var $download_image_size		Default full. Image size identifier.
+ * @var $pagination_type			Default bullets. The type of pagination to display. Can be "bullets", "fraction", or "progressbar".
+ * @var $autoplay					Default true. Controls whether the slider should autoplay.
+ * @var $autoplay_delay				Default 3000. Controls the duration at which the carousel progresses to the next slide.
  */
 ?>
 
 <!-- Swiper -->
 <style>
+	:root {
+		--swiper-theme-color: #ca1237 !important;
+	}
+
 	#swiper.swiper-container {
 		width: 100%;
 		height: 500px;
@@ -27,7 +35,6 @@
 	#swiper .swiper-slide {
 		text-align: center;
 		font-size: 18px;
-		background: #fff;
 		height: 100%;
 		object-fit: cover;
 		overflow: hidden;
@@ -46,9 +53,15 @@
 		align-items: center;
 	}
 
-
 	#swiper.swiper_<?php echo esc_html($name); ?> .swiper-slide{
 		height: calc((100% - <?php echo esc_html($space_between * ($slides_per_column - 1));?>px) / <?php echo esc_html($slides_per_column);?>);
+	}
+
+	#swiper.swiper-container .swiper-slide {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 50%;
 	}
 
 	#swiper [data-download-url]:hover {
@@ -60,9 +73,11 @@
 	.swiper-container .swiper-button-prev {
 		background: hsl(0, 0%, 100%);
 		color: hsl(0, 0%, 30%);
-		padding: 1em .5em 1em .8em;
-		box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-		transition: 300ms ease-in-out color;
+		transition: 300ms ease-in-out all;
+		border-radius: 100%;
+		width: 50px;
+		height: 50px;
+		border: 1px solid hsla(0, 0%, 90%)
 	}
 
 	.swiper-container .swiper-button-next:after,
@@ -74,27 +89,53 @@
 	.swiper-container .swiper-button-prev:hover,
 	.swiper-container .swiper-button-next:active,
 	.swiper-container .swiper-button-prev:active {
-		color: #ca1237;
+		color: var(--swiper-theme-color);
+		box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+	}
+
+	.swiper-container .swiper-button-next:after,
+	.swiper-container .swiper-button-prev:after {
+		font-family: "wsu-icons" !important;
+		font-size: 24px;
+		width: 20px;
+		text-align: center;
+		text-indent: -2px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
 	}
 
 	.swiper-container .swiper-button-next {
-		right: 0;
-		border-top-left-radius: 5px;
-		border-bottom-left-radius: 5px;
-		padding: 1em .5em 1em .8em;
+		right: 1em;
+	}
+
+	.swiper-container .swiper-button-next:after {
+		content: "\F107";
+		margin-left: 2px;
 	}
 
 	.swiper-container .swiper-button-prev {
-		left: 0;
-		border-top-right-radius: 5px;
-		border-bottom-right-radius: 5px;
-		padding: 1em .8em 1em .5em;
+		left: 1em;
 	}
 
-	/* Pagination */
-	.swiper-container .swiper-pagination-bullet-active {
-		background: #ca1237;
+	.swiper-container .swiper-button-prev:after {
+		content: "\F105";
+		margin-right: 2px;
 	}
+
+	/* Pagination Styles */
+	.swiper-container.swiper-container-horizontal>.swiper-pagination-bullets,
+	.swiper-container.swiper-pagination-custom,
+	.swiper-container.swiper-pagination-fraction {
+		width: initial;
+		left: 50%;
+		transform: translateX(-50%);
+		background: white;
+		border-radius: 5px;
+		padding: 0 7px 2px;
+	}
+
 </style>
 
 <div id="swiper" class="swiper-container swiper_<?php echo esc_attr($name); ?>">
@@ -107,7 +148,7 @@
 
 				<div class="swiper-slide">
 					<div class="swiper-lazy-preloader"></div>
-					<img data-src="<?php echo esc_url($image_url);?>" class="swiper-lazy" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?>>
+					<img data-src="<?php echo esc_url($image_url);?>" class="swiper-lazy" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?> alt="<?php echo esc_attr(get_post_meta( $photo_id, '_wp_attachment_image_alt', true )); ?>">
 				</div>
 			<?php endforeach; ?>
 		<?php else: ?>
@@ -116,7 +157,7 @@
 				<?php $download_image_url = wp_get_attachment_image_src($photo_id, $download_image_size)[0]; ?>
 
 				<div class="swiper-slide">
-					<img src="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?>>
+					<img src="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?> alt="<?php echo esc_attr(get_post_meta( $photo_id, '_wp_attachment_image_alt', true )); ?>">
 				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>
@@ -165,36 +206,61 @@ document.addEventListener("DOMContentLoaded", function() {
 		.catch(e => console.error(e));
 	}
 
+	// Create click event listener
 	const swiperSlides = document.querySelectorAll('.swiper-slide img');
-
-	console.log(swiperSlides);
-
 
 	swiperSlides.forEach(slideImage => {
 		slideImage.addEventListener('click', (e) => {
 			e.preventDefault();
 
-			downloadResource(slideImage.dataset.downloadUrl);
+			if (typeof slideImage.dataset.downloadUrl !== "undefined") {
+				downloadResource(slideImage.dataset.downloadUrl);
+			}
 		});
 	});
 
+	// Init swiper
 	const swiper = new Swiper('.swiper_<?php echo esc_js($name); ?>', {
-		slidesPerView: <?php echo esc_js($slides_per_view); ?>,
-		slidesPerColumn: <?php echo esc_js($slides_per_column); ?>,
-		spaceBetween: <?php echo esc_js($space_between); ?>,
+		slidesPerView: 1,
+		slidesPerColumn: 1,
+		spaceBetween: 10,
 		navigation: {
 			nextEl: '.swiper-button-next',
 			prevEl: '.swiper-button-prev',
 		},
 		pagination: {
 			el: '.swiper-pagination',
+			type: '<?php echo esc_js($pagination_type); ?>',
 			clickable: true,
 		},
 		preloadImages: <?php echo esc_js($preload_images); ?>,
 		lazy: <?php echo esc_js($lazy); ?>,
-		watchSlidesVisibility: <?php echo esc_js($watch_slides_visibility); ?>
+		watchSlidesVisibility: <?php echo esc_js($watch_slides_visibility); ?>,
+		keyboard: {
+			enabled: true
+		},
+		autoplay: {
+			enabled: <?php echo esc_js($autoplay); ?>,
+			delay: <?php echo esc_js($autoplay_delay); ?>,
+		},
+		breakpoints: {
+			576: {
+				slidesPerView: 2,
+				slidesPerColumn: 1,
+				spaceBetween: 20,
+			},
+			// when window width is >= 1200px
+			768: {
+				slidesPerView: <?php echo esc_js($slides_per_view); ?>,
+				slidesPerColumn: <?php echo esc_js($slides_per_column); ?>,
+				spaceBetween: <?php echo esc_js($space_between); ?>,
+			}
+		}
+		// TODO: Add breakpoints
 	});
+
+
+
 });
 </script>
-
 
