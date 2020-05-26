@@ -148,7 +148,7 @@
 
 				<div class="swiper-slide">
 					<div class="swiper-lazy-preloader"></div>
-					<img data-src="<?php echo esc_url($image_url);?>" class="swiper-lazy" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?>>
+					<img data-src="<?php echo esc_url($image_url);?>" class="swiper-lazy" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?> alt="<?php echo esc_attr(get_post_meta( $photo_id, '_wp_attachment_image_alt', true )); ?>">
 				</div>
 			<?php endforeach; ?>
 		<?php else: ?>
@@ -157,7 +157,7 @@
 				<?php $download_image_url = wp_get_attachment_image_src($photo_id, $download_image_size)[0]; ?>
 
 				<div class="swiper-slide">
-					<img src="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?>>
+					<img src="<?php echo esc_url($image_url);?>" <?php if ($download_image_on_click == 'true') : ?> data-download-url="<?php echo esc_url($download_image_url);?>" <?php endif; ?> alt="<?php echo esc_attr(get_post_meta( $photo_id, '_wp_attachment_image_alt', true )); ?>">
 				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>
