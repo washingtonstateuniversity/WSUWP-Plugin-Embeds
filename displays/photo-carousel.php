@@ -218,9 +218,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// Init swiper
 	const swiper = new Swiper('.swiper_<?php echo esc_js($name); ?>', {
-		slidesPerView: <?php echo esc_js($slides_per_view); ?>,
-		slidesPerColumn: <?php echo esc_js($slides_per_column); ?>,
-		spaceBetween: <?php echo esc_js($space_between); ?>,
+		slidesPerView: 1,
+		slidesPerColumn: 1,
+		spaceBetween: 10,
 		navigation: {
 			nextEl: '.swiper-button-next',
 			prevEl: '.swiper-button-prev',
@@ -232,9 +232,32 @@ document.addEventListener("DOMContentLoaded", function() {
 		},
 		preloadImages: <?php echo esc_js($preload_images); ?>,
 		lazy: <?php echo esc_js($lazy); ?>,
-		watchSlidesVisibility: <?php echo esc_js($watch_slides_visibility); ?>
+		watchSlidesVisibility: <?php echo esc_js($watch_slides_visibility); ?>,
+		keyboard: {
+			enabled: true
+		},
+		autoplay: {
+			enabled: <?php echo esc_js($autoplay); ?>,
+			delay: <?php echo esc_js($autoplay_delay); ?>,
+		},
+		breakpoints: {
+			576: {
+				slidesPerView: 2,
+				slidesPerColumn: 1,
+				spaceBetween: 20,
+			},
+			// when window width is >= 1200px
+			768: {
+				slidesPerView: <?php echo esc_js($slides_per_view); ?>,
+				slidesPerColumn: <?php echo esc_js($slides_per_column); ?>,
+				spaceBetween: <?php echo esc_js($space_between); ?>,
+			}
+		}
+		// TODO: Add breakpoints
 	});
+
+
+
 });
 </script>
-
 
