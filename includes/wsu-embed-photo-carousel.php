@@ -31,7 +31,8 @@ class WSUWP_Embed_Photo_Carousel {
 			'lazy'                    => 'true', // JS booleans must be strings to work with this method
 			'watch_slides_visibility' => 'true', // JS booleans must be strings to work with this method
 			'download_image_on_click' => false,
-			'download_image_size'     => 'full'
+			'download_image_size'     => 'full',
+			'pagination_type'         => 'bullets'
 		);
 
 		$atts = shortcode_atts( $default_atts, $atts );
@@ -53,6 +54,7 @@ class WSUWP_Embed_Photo_Carousel {
 			$watch_slides_visibility = $atts['watch_slides_visibility'];
 			$download_image_on_click = $atts['download_image_on_click'];
 			$download_image_size = $atts['download_image_size'];
+			$pagination_type = $atts['pagination_type'];
 
 			//
 			// Process any Vars as needed

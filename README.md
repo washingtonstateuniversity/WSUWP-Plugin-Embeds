@@ -51,6 +51,9 @@ Extends the WSUWP Platform to include support for various embeds.
     * `lazy` - Default true. Enables images lazy loading. If you use slidesPerView, then you should also enable watchSlidesVisibility and Swiper will load images in currently visible slides.
     * `watch_slides_visibility` - Default true. Enable this option and slides that are in viewport will have additional visible class.
     * `download_image_on_click` - Default false. Returns true or false, if the user whats the images to download on click.
+    * `download_image_size` - Default full. Image size identifier.
+    * `pagination_type` - Default bullets. The type of pagination to display. Can be "bullets", "fraction", or "progressbar".
+
 
 ## Twitter Timeline
 
