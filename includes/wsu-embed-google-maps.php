@@ -31,14 +31,14 @@ function wsu_googlemaps_embed_to_short_code_callback( $match ) {
 
 	if ( preg_match( '/\bwidth=[\'"](\d+)(%)?/', $match[0], $width ) ) {
 		$percent = ! empty( $width[2] ) ? '%' : '';
-		$width = absint( $width[1] ) . $percent;
+		$width   = absint( $width[1] ) . $percent;
 	} else {
 		$width = 425;
 	}
 
 	if ( preg_match( '/\bheight=[\'"](\d+)(%)?/', $match[0], $height ) ) {
 		$percent = ! empty( $height[2] ) ? '%' : '';
-		$height = absint( $height[1] ) . $percent;
+		$height  = absint( $height[1] ) . $percent;
 	} else {
 		$height = 350;
 	}
@@ -67,7 +67,7 @@ function wsu_googlemaps_shortcode( $atts ) {
 
 	$params = ltrim( $atts[0], '=' );
 
-	$width = 425;
+	$width  = 425;
 	$height = 350;
 
 	if ( preg_match( '!^https?://(www|maps|mapsengine)\.google(\.co|\.com)?(\.[a-z]+)?/.*?(\?.+)!i', $params, $match ) ) {
@@ -83,10 +83,10 @@ function wsu_googlemaps_shortcode( $atts ) {
 		foreach ( (array) $arg as $key => $value ) {
 			if ( 'w' == $key ) {
 				$percent = ( '%' == substr( $value, -1 ) ) ? '%' : '';
-				$width = (int) $value . $percent;
+				$width   = (int) $value . $percent;
 			} elseif ( 'h' == $key ) {
 				$height = (int) $value;
-			} elseif ( 'https://www_google_com/maps/embed?pb' === $key ) {
+			} else {
 				// Replace any spaces in the URL with +, otherwise the embed will break.
 				$value = preg_replace( '/\s+/', '+', $value );
 
@@ -103,7 +103,7 @@ function wsu_googlemaps_shortcode( $atts ) {
 				$key = str_replace( '_', '.', $key );
 
 				// Phew.
-				$url .= "$key=$value";
+				$url .= esc_attr( "$key=$value&amp;" );
 			}
 		}
 		$url = substr( $url, 0, -5 );
