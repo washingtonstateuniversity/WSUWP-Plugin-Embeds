@@ -81,8 +81,8 @@ class WSUWP_Embed_Iframes {
 				<?php if ( ! empty( $atts['responsive'] ) ) { ?>
 				style="height:100%;left:0;position:absolute;top:0;width:100%;"
 				<?php } else { ?>
-				width="<?php echo esc_attr( absint( $atts['width'] ) ); ?>"
-				height="<?php echo esc_attr( absint( $atts['height'] ) ); ?>"
+				width="<?php echo esc_attr( $atts['width'] ); ?>"
+				height="<?php echo esc_attr( $atts['height'] ); ?>"
 				<?php } ?>
 				title="<?php echo esc_attr( $atts['title'] ); ?>">This is an embedded <a href="https://office.com">Microsoft Office</a> document, powered by <a href="https://office.com/webapps">Office Online</a>.</iframe>
 		<?php
