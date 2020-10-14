@@ -52,7 +52,8 @@ class WSUWP_Embed_Iframes {
 		// Define the list of hosts from which iframe embeds are allowed.
 		$allowed_hosts = array(
 			'emailwsu.sharepoint.com',
-			'chaselab.net'
+			'chaselab.net',
+			'fast.wistia.net'
 		);
 
 		// Bail if the host of the `src` attribute value isn't allowed.

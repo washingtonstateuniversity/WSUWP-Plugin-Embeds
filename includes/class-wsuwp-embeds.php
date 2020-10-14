@@ -7,7 +7,7 @@ class WSUWP_Embeds {
 	 * @var WSUWP_Embeds
 	 */
 	private static $instance;
-	private static $version = '1.5.5';
+	private static $version = '1.5.6';
 
 	/**
 	 * Maintains and returns the one instance. Initiate hooks when
