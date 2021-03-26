@@ -7,7 +7,7 @@ class WSUWP_Embeds {
 	 * @var WSUWP_Embeds
 	 */
 	private static $instance;
-	private static $version = '1.5.6';
+	private static $version = '1.5.7';
 
 	/**
 	 * Maintains and returns the one instance. Initiate hooks when
@@ -473,8 +473,23 @@ class WSUWP_Embeds {
 	 *
 	 * @return string
 	 */
-	public function get_the_title() {
-		$the_title = get_the_title(get_the_ID());
+	public function get_the_title( $atts ) {
+
+		$default = array(
+			'urlencode' => '',
+		);
+
+		$atts = shortcode_atts( $default, $atts );
+
+		if ( ! empty( $atts['urlencode'] ) ) {
+
+			$the_permalink = urlencode( get_the_title( get_the_ID() ) );
+
+		} else {
+
+			$the_permalink = get_the_title( get_the_ID() );
+
+		}
 
 		return $the_title;
 	}
@@ -484,8 +499,23 @@ class WSUWP_Embeds {
 	 *
 	 * @return string
 	 */
-	public function get_the_permalink() {
-		$the_permalink = get_the_permalink(get_the_ID());
+	public function get_the_permalink( $atts ) {
+
+		$default = array(
+			'urlencode' => '',
+		);
+
+		$atts = shortcode_atts( $default, $atts );
+
+		if ( ! empty( $atts['urlencode'] ) ) {
+
+			$the_permalink = urlencode( get_the_permalink( get_the_ID() ) );
+
+		} else {
+
+			$the_permalink = get_the_permalink( get_the_ID() );
+
+		}
 
 		return $the_permalink;
 	}
