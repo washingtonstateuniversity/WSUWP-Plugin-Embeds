@@ -1,6 +1,6 @@
 <?php if ( defined( 'ISWDS' ) ) : ?>
     <div class="wsu-cta wsu-cta--width-inline wsu-spacing-after--sxxsmall">
-        <a href="#<?php echo esc_attr( $atts['data_widget_id'] ); ?>-skiplink" class="wsu-button wsu-button--style-outline wsu-button--size-small wsu-skip-social-media">
+        <a href="#<?php echo esc_attr( $atts['data_widget_id'] ); ?>-skiplink" class="wsu-button wsu-button--style-outline wsu-button--size-small wsu-button--style-skip">
             Skip Social Media Feed
         </a>
     </div>
