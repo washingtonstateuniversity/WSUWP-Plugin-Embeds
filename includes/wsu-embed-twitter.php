@@ -70,10 +70,10 @@ class WSUWP_Embed_Twitter {
 
 		ob_start();
 
-		include __DIR__ . '/template-parts/twitter.php';
+		include WSUWP_Embeds::get_template_path() . 'twitter.php';
 		
 		$content = ob_get_contents();
-		
+
 		ob_end_clean();
 
 		return $content;
