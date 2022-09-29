@@ -69,12 +69,11 @@ class WSUWP_Embed_Twitter {
 		$atts = shortcode_atts( $defaults, $atts );
 
 		ob_start();
-		?><a class="twitter-timeline"
-			 href="<?php echo esc_url( $atts['href'] ); ?>"
-			 data-widget-id="<?php echo esc_attr( $atts['data_widget_id'] ); ?>"><?php echo esc_html( $atts['name'] ); ?></a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><?php
 
+		include __DIR__ . '/template-parts/twitter.php';
+		
 		$content = ob_get_contents();
+		
 		ob_end_clean();
 
 		return $content;
